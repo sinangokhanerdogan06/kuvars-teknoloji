@@ -431,9 +431,28 @@ async function urunleriYukle() {
     if (result.status === 'success') {
       grid.innerHTML = '';
 
-      const aramaKelimesi = new URLSearchParams(window.location.search).get('arama');
+      const params = new URLSearchParams(window.location.search);
+      const aramaKelimesi = params.get('arama');
+      const catParam = params.get('cat');
+
+      // Sayfa adından kategori çıkar (klavye.html → klavye)
+      const sayfaAdi = window.location.pathname.split('/').pop().replace('.html', '');
+      const kategoriSayfalar = ['klavye','kulaklik','mouse','mousepad','ekran','laptop'];
+      const sayfaKategorisi = kategoriSayfalar.includes(sayfaAdi) ? sayfaAdi : null;
+
       let urunler = result.data;
 
+      // Kategori sayfasındaysa sadece o kategorinin ürünlerini göster
+      if (sayfaKategorisi) {
+        urunler = urunler.filter(u => u.kategori.toLowerCase() === sayfaKategorisi);
+      }
+
+      // Alt kategori filtresi (?cat=mekanik gibi)
+      if (catParam) {
+        urunler = urunler.filter(u => u.kategori.toLowerCase() === catParam.toLowerCase());
+      }
+
+      // Arama filtresi
       if (aramaKelimesi) {
         const kucuk = aramaKelimesi.toLowerCase();
         urunler = urunler.filter(u =>
