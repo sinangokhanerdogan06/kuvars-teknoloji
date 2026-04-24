@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ürün Bul – Kuvars Teknoloji</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-main">
+    <a href="index.html" class="site-logo">
+      <svg class="logo-crystal" viewBox="0 0 34 42" fill="none" width="34" height="34">
+        <path d="M17 2L31 10L25 14L17 11L9 14L3 10L17 2Z" fill="#DC2626"/>
+        <path d="M3 10L9 14V30L17 40L9 30V14L3 10Z" fill="#7F1D1D"/>
+        <path d="M31 10L25 14V30L17 40L25 30V14L31 10Z" fill="#991B1B"/>
+        <path d="M9 14L17 11L25 14L17 18L9 14Z" fill="#EF4444" opacity="0.8"/>
+      </svg>
+      <div class="logo-text-wrap">
+        <span class="logo-brand">Kuvars</span>
+        <span class="logo-sub">Teknoloji</span>
+      </div>
+    </a>
+    <div class="search-bar">
+      <input type="search" placeholder="Ürün, kategori veya marka ara…" />
+      <button class="search-btn">🔍</button>
+    </div>
+    <div class="topbar-actions">
+      <button class="theme-toggle" id="themeToggle">☀️</button>
+      <button class="cart-btn">🛒<span class="cart-badge" id="cartBadge">0</span></button>
+      <a href="#" class="btn-login">Giriş Yap</a>
+      <a href="#" class="btn-register">Üye Ol</a>
+    </div>
+    <button class="hamburger"><span></span><span></span><span></span></button>
+  </div>
+  <nav class="subnav">
+    <ul>
+      <li><a href="index.html">Ana Sayfa</a></li>
+      <li><a href="kampanya.html">Kampanyalar</a></li>
+      <li><a href="urunler.html">Ürünler</a></li>
+      <li><a href="quiz.html" class="active">Ürün Bul</a></li>
+    </ul>
+  </nav>
+  <div class="mobile-menu">
+    <a href="index.html">🏠 Ana Sayfa</a>
+    <a href="kampanya.html">🎉 Kampanyalar</a>
+    <a href="urunler.html">🛍️ Ürünler</a>
+    <a href="quiz.html">🔍 Ürün Bul</a>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="hero-badge">🎯 Kişiselleştirilmiş Test</div>
+  <h1 class="page-title">Sana En Uygun <span>Ürünü Bul</span></h1>
+  <p class="page-sub">4 kısa soruyu yanıtla, senin için ideal ürünü birlikte bulalım!</p>
+</div>
+
+<div class="section" style="padding-top:2rem;padding-bottom:5rem">
+  <div class="quiz-container">
+    <div id="quiz-app"></div>
+  </div>
+</div>
+
+<footer class="site-footer" style="padding:2rem">
+  <div class="footer-bottom" style="border:none;padding:0">
+    <p>© 2025 Kuvars Teknoloji. Tüm hakları saklıdır.</p>
+    <a href="index.html" style="font-size:.82rem;color:var(--red2)">Ana Sayfaya Dön →</a>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

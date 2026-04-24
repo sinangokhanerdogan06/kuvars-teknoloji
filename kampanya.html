@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kampanyalar – Kuvars Teknoloji</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-main">
+    <a href="index.html" class="site-logo">
+      <svg class="logo-crystal" viewBox="0 0 34 42" fill="none" width="34" height="34">
+        <path d="M17 2L31 10L25 14L17 11L9 14L3 10L17 2Z" fill="#DC2626"/>
+        <path d="M3 10L9 14V30L17 40L9 30V14L3 10Z" fill="#7F1D1D"/>
+        <path d="M31 10L25 14V30L17 40L25 30V14L31 10Z" fill="#991B1B"/>
+        <path d="M9 14L17 11L25 14L17 18L9 14Z" fill="#EF4444" opacity="0.8"/>
+      </svg>
+      <div class="logo-text-wrap">
+        <span class="logo-brand">Kuvars</span>
+        <span class="logo-sub">Teknoloji</span>
+      </div>
+    </a>
+    <div class="search-bar">
+      <input type="search" placeholder="Ürün, kategori veya marka ara…" />
+      <button class="search-btn">🔍</button>
+    </div>
+    <div class="topbar-actions">
+      <button class="theme-toggle" id="themeToggle">☀️</button>
+      <button class="cart-btn">🛒<span class="cart-badge" id="cartBadge">0</span></button>
+      <a href="#" class="btn-login">Giriş Yap</a>
+      <a href="#" class="btn-register">Üye Ol</a>
+    </div>
+    <button class="hamburger"><span></span><span></span><span></span></button>
+  </div>
+  <nav class="subnav">
+    <ul>
+      <li><a href="index.html">Ana Sayfa</a></li>
+      <li><a href="kampanya.html" class="active">Kampanyalar</a></li>
+      <li><a href="urunler.html">Ürünler</a></li>
+      <li><a href="quiz.html">Ürün Bul</a></li>
+    </ul>
+  </nav>
+  <div class="mobile-menu">
+    <a href="index.html">🏠 Ana Sayfa</a>
+    <a href="kampanya.html">🎉 Kampanyalar</a>
+    <a href="urunler.html">🛍️ Ürünler</a>
+    <a href="quiz.html">🔍 Ürün Bul</a>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="hero-badge">🎉 Sınırlı Süreli Fırsat</div>
+  <h1 class="page-title">Dönemsel <span>Kampanyalar</span></h1>
+  <p class="page-sub">Sınırlı süreyle geçerli büyük indirimler, hediyeler ve özel teklifler seni bekliyor.</p>
+</div>
+
+<div class="section">
+  <!-- Value Props -->
+  <div class="cards-grid" style="margin-bottom:4rem">
+    <div class="value-card fade-in">
+      <div class="value-icon">🚀</div>
+      <h3>%30'a Varan İndirim</h3>
+      <p>Tüm Kuvars Teknoloji ürünlerinde kampanya boyunca geçerli büyük indirimlerden yararlan.</p>
+    </div>
+    <div class="value-card fade-in">
+      <div class="value-icon">🎁</div>
+      <h3>Ücretsiz Aksesuar Hediye</h3>
+      <p>500₺ ve üzeri her siparişte kampanya koleksiyonundan premium aksesuar seti ücretsiz.</p>
+    </div>
+    <div class="value-card fade-in">
+      <div class="value-icon">⚡</div>
+      <h3>Aynı Gün Kargo</h3>
+      <p>Kampanya süresince tüm siparişlerde ücretsiz aynı gün kargo imkânı.</p>
+    </div>
+  </div>
+
+  <!-- Countdown -->
+  <div class="countdown-wrapper fade-in">
+    <div class="countdown-title">⏱️ Kampanya bitimine kalan süre</div>
+    <div class="countdown-timer" id="countdown">
+      <div class="countdown-unit"><div class="countdown-num" data-unit="days">00</div><div class="countdown-label">Gün</div></div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-unit"><div class="countdown-num" data-unit="hours">00</div><div class="countdown-label">Saat</div></div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-unit"><div class="countdown-num" data-unit="minutes">00</div><div class="countdown-label">Dakika</div></div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-unit"><div class="countdown-num" data-unit="seconds">00</div><div class="countdown-label">Saniye</div></div>
+    </div>
+    <p style="margin-top:1.5rem;font-size:.78rem;color:var(--muted)">* Kampanya 31 Aralık 2025 saat 23:59'da sona erer.</p>
+  </div>
+
+  <!-- Message flow -->
+  <h2 class="page-title" style="margin-bottom:2rem;font-size:1.75rem">Kampanya <span>Mesajı</span></h2>
+  <div class="message-flow">
+    <div class="message-bubble fade-in">
+      <div class="bubble-avatar brand">⚡</div>
+      <div class="bubble-text brand">Merhaba! Kuvars Teknoloji olarak teknolojinin gücüne inanıyoruz. En iyi fiyat, orijinal ürün garantisi ve hızlı teslimat bizim standartlarımız.</div>
+    </div>
+    <div class="message-bubble right fade-in">
+      <div class="bubble-avatar user">👤</div>
+      <div class="bubble-text user">Peki kampanyalarınız ne sunuyor?</div>
+    </div>
+    <div class="message-bubble fade-in">
+      <div class="bubble-avatar brand">🚀</div>
+      <div class="bubble-text brand">En son teknoloji ürünlerde <strong style="color:var(--red2)">%30'a varan indirimler</strong>, ücretsiz kargo ve aksesuar hediyeleri! Üstelik bu yalnızca sınırlı süre.</div>
+    </div>
+    <div class="message-bubble right fade-in">
+      <div class="bubble-avatar user">👤</div>
+      <div class="bubble-text user">Hangi ürün bana uyar acaba?</div>
+    </div>
+    <div class="message-bubble fade-in">
+      <div class="bubble-avatar brand">✨</div>
+      <div class="bubble-text brand">
+        Hemen <a href="quiz.html" style="color:var(--red2);font-weight:600">ürün bulucu quiz'imizi</a> dene, sana özel tavsiye verelim! Sadece 3 soru yeterli. 🎯
+      </div>
+    </div>
+    <div class="message-bubble right fade-in">
+      <div class="bubble-avatar user">👤</div>
+      <div class="bubble-text user">Harika, hemen deniyorum! 🔥</div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:3rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+    <a href="urunler.html" class="btn-primary">Ürünleri İncele →</a>
+    <a href="quiz.html" class="btn-outline">Quiz'i Dene</a>
+  </div>
+</div>
+
+<footer class="site-footer" style="padding:2rem">
+  <div class="footer-bottom" style="border:none;padding:0">
+    <p>© 2025 Kuvars Teknoloji. Tüm hakları saklıdır.</p>
+    <a href="index.html" style="font-size:.82rem;color:var(--red2)">Ana Sayfaya Dön →</a>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kuvars Teknoloji – Teknolojinin Özünde</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     TOPBAR
+════════════════════════════════════════ -->
+<header class="topbar">
+  <div class="topbar-main">
+    <!-- Logo -->
+    <a href="index.html" class="site-logo">
+      <svg class="logo-crystal" viewBox="0 0 34 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17 2L31 10V10L25 14L17 11L9 14L3 10V10L17 2Z" fill="#DC2626"/>
+        <path d="M3 10L9 14V30L17 40L9 30V14L3 10Z" fill="#7F1D1D"/>
+        <path d="M31 10L25 14V30L17 40L25 30V14L31 10Z" fill="#991B1B"/>
+        <path d="M9 14L17 11L25 14L17 18L9 14Z" fill="#EF4444" opacity="0.8"/>
+        <path d="M9 14V30L17 18V40L17 40L9 30V14Z" fill="#DC2626" opacity="0.4"/>
+        <path d="M25 14V30L17 18V40L17 40L25 30V14Z" fill="#EF4444" opacity="0.25"/>
+      </svg>
+      <div class="logo-text-wrap">
+        <span class="logo-brand">Kuvars</span>
+        <span class="logo-sub">Teknoloji</span>
+      </div>
+    </a>
+
+    <!-- Search -->
+    <div class="search-bar">
+      <input type="search" placeholder="Ürün, kategori veya marka ara…" id="searchInput" />
+      <button class="search-btn" title="Ara">🔍</button>
+    </div>
+
+    <!-- Actions -->
+    <div class="topbar-actions">
+      <button class="theme-toggle" id="themeToggle" title="Tema Değiştir">☀️</button>
+      <button class="cart-btn" title="Sepet">
+        🛒
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
+      <a href="#" class="btn-login">Giriş Yap</a>
+      <a href="#" class="btn-register">Üye Ol</a>
+    </div>
+
+    <!-- Hamburger (mobile) -->
+    <button class="hamburger" aria-label="Menü">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- Sub navigation -->
+  <nav class="subnav">
+    <ul>
+      <li><a href="index.html" class="active">Ana Sayfa</a></li>
+      <li><a href="kampanya.html">Kampanyalar</a></li>
+      <li><a href="urunler.html">Ürünler</a></li>
+      <li><a href="quiz.html">Ürün Bul</a></li>
+    </ul>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu">
+    <a href="index.html">🏠 Ana Sayfa</a>
+    <a href="kampanya.html">🎉 Kampanyalar</a>
+    <a href="urunler.html">🛍️ Ürünler</a>
+    <a href="quiz.html">🔍 Ürün Bul</a>
+    <a href="#" style="color:var(--red2)">👤 Giriş Yap</a>
+    <a href="#" style="color:var(--red2)">✨ Üye Ol</a>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════
+     CAMPAIGN BANNER (placeholder)
+════════════════════════════════════════ -->
+<div class="campaign-banner">
+  <div class="campaign-inner">
+    <!-- corner accents -->
+    <div class="campaign-corner tl"></div>
+    <div class="campaign-corner tr"></div>
+    <div class="campaign-corner bl"></div>
+    <div class="campaign-corner br"></div>
+
+    <div class="campaign-placeholder">
+      <div class="campaign-placeholder-label">📢 Kampanya Alanı</div>
+      <h2>Yılın En Büyük İndirimleri</h2>
+      <p>
+        Bu alana özel kampanya görseli ve tanıtım içeriği yerleştirilebilir.
+        Fotoğraf, video veya interaktif banner için hazır.
+      </p>
+      <a href="kampanya.html" class="btn-primary">Kampanyalara Göz At →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     CATEGORIES
+════════════════════════════════════════ -->
+<section class="categories-section">
+  <div class="section-header">
+    <h2 class="section-title">Kategoriler</h2>
+    <a href="urunler.html" class="section-link">Tümünü Gör →</a>
+  </div>
+
+  <div class="cat-slider-wrap">
+    <div class="cat-slider" id="catSlider">
+
+      <a href="urunler.html?cat=ekran" class="cat-card">
+        <span class="cat-icon">🖥️</span>
+        <span class="cat-label">Ekran</span>
+      </a>
+
+      <a href="urunler.html?cat=kulaklik" class="cat-card">
+        <span class="cat-icon">🎧</span>
+        <span class="cat-label">Kulaklık</span>
+      </a>
+
+      <a href="urunler.html?cat=klavye" class="cat-card">
+        <span class="cat-icon">⌨️</span>
+        <span class="cat-label">Klavye</span>
+      </a>
+
+      <a href="urunler.html?cat=mouse" class="cat-card">
+        <span class="cat-icon">🖱️</span>
+        <span class="cat-label">Mouse</span>
+      </a>
+
+      <a href="urunler.html?cat=mousepad" class="cat-card">
+        <span class="cat-icon">🟥</span>
+        <span class="cat-label">Mouse Pad</span>
+      </a>
+
+      <a href="urunler.html?cat=laptop" class="cat-card">
+        <span class="cat-icon">💻</span>
+        <span class="cat-label">Laptop</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     FINDER QUIZ
+════════════════════════════════════════ -->
+<section class="finder-section">
+  <div class="finder-inner">
+    <div class="finder-badge">🔍 Akıllı Ürün Bulucu</div>
+    <h2 class="finder-title">Sana Uygun Ürünü <span>Bul</span></h2>
+    <p class="finder-sub">
+      3 kısa soruyu yanıtla — kullanım amacına, ortamına ve bütçene göre
+      en ideal Kuvars Teknoloji ürününü anında bulalım.
+    </p>
+    <div id="finder-quiz-app"></div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     WHY KUVARS
+════════════════════════════════════════ -->
+<section class="why-section">
+  <div class="section-header" style="padding:0;margin-bottom:0">
+    <div>
+      <h2 class="section-title" style="text-align:left">Neden <span>Kuvars Teknoloji</span>?</h2>
+      <p style="color:var(--muted);font-size:.93rem;margin-top:.4rem;line-height:1.6">
+        Müşteri memnuniyetini her şeyin üzerinde tutuyoruz.
+      </p>
+    </div>
+  </div>
+
+  <div class="why-grid" style="margin-top:2.5rem">
+    <div class="why-card fade-in">
+      <div class="why-icon">🚀</div>
+      <div class="why-title">Aynı Gün Kargo</div>
+      <div class="why-desc">Saat 14:00'e kadar verilen siparişler aynı gün kargoya teslim edilir.</div>
+    </div>
+    <div class="why-card fade-in">
+      <div class="why-icon">✅</div>
+      <div class="why-title">Orijinal Ürün Garantisi</div>
+      <div class="why-desc">Tüm ürünlerimiz resmi distribütörlerden temin edilir, fatura ile garanti belgesi verilir.</div>
+    </div>
+    <div class="why-card fade-in">
+      <div class="why-icon">🔄</div>
+      <div class="why-title">Kolay İade & Değişim</div>
+      <div class="why-desc">30 gün içinde ücretsiz iade veya ürün değişimi garantisi sunuyoruz.</div>
+    </div>
+    <div class="why-card fade-in">
+      <div class="why-icon">💬</div>
+      <div class="why-title">7/24 Canlı Destek</div>
+      <div class="why-desc">Uzman ekibimiz haftanın 7 günü, günün 24 saati sorularınızı yanıtlamaya hazır.</div>
+    </div>
+    <div class="why-card fade-in">
+      <div class="why-icon">🔒</div>
+      <div class="why-title">Güvenli Ödeme</div>
+      <div class="why-desc">SSL şifrelemesi, 3D Secure ve 256-bit güvenlik protokolleri ile güvende alışveriş.</div>
+    </div>
+    <div class="why-card fade-in">
+      <div class="why-icon">🎁</div>
+      <div class="why-title">Özel Kampanyalar</div>
+      <div class="why-desc">Üyelerimize özel indirimler, sezon kampanyaları ve sürpriz hediyeler düzenli olarak sunulur.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     CUSTOMER REVIEWS
+════════════════════════════════════════ -->
+<section class="reviews-section">
+  <div class="reviews-inner">
+    <div class="section-header" style="padding:0">
+      <h2 class="section-title">Müşteri <span>Yorumları</span></h2>
+      <span style="font-size:.85rem;color:var(--muted)">⭐ 4.8 / 5 · 2.400+ Değerlendirme</span>
+    </div>
+
+    <div class="reviews-grid">
+
+      <div class="review-card fade-in">
+        <div class="review-header">
+          <div class="review-avatar">MK</div>
+          <div class="review-meta">
+            <div class="review-name">Mehmet K.</div>
+            <div class="review-product">Kablosuz Kulaklık X1</div>
+          </div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">
+          Ses kalitesi gerçekten inanılmaz. ANC özelliği metrodaki gürültüyü tam olarak kesiyor. Aynı fiyat aralığındaki en iyi kulaklık bu olabilir. Hızlı kargo ve özenli paketleme için de teşekkürler!
+        </div>
+        <div class="review-verified">✓ Doğrulanmış Alışveriş</div>
+        <div class="review-date">14 Kasım 2024</div>
+      </div>
+
+      <div class="review-card fade-in">
+        <div class="review-header">
+          <div class="review-avatar">AY</div>
+          <div class="review-meta">
+            <div class="review-name">Ayşe Y.</div>
+            <div class="review-product">Gaming Mouse Pro</div>
+          </div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">
+          Gaming mouse için tam doğru adres. Ürün beklediğimden de iyi çıktı. Sensör hassasiyeti mükemmel, ergonomi çok başarılı. Uzun FPS seanslarında el yorulmadan kullanabiliyorum.
+        </div>
+        <div class="review-verified">✓ Doğrulanmış Alışveriş</div>
+        <div class="review-date">2 Aralık 2024</div>
+      </div>
+
+      <div class="review-card fade-in">
+        <div class="review-header">
+          <div class="review-avatar">CD</div>
+          <div class="review-meta">
+            <div class="review-name">Can D.</div>
+            <div class="review-product">27" IPS Oyun Monitörü</div>
+          </div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">
+          Monitör fiyatları diğer sitelere kıyasla gerçekten daha uygun. 144Hz ve IPS panel kombinasyonu harika. Renk kalibrasyonu kutudan çıktığı gibi mükemmeldi, ek ayar gerekmedi.
+        </div>
+        <div class="review-verified">✓ Doğrulanmış Alışveriş</div>
+        <div class="review-date">8 Ocak 2025</div>
+      </div>
+
+      <div class="review-card fade-in">
+        <div class="review-header">
+          <div class="review-avatar">ZA</div>
+          <div class="review-meta">
+            <div class="review-name">Zeynep A.</div>
+            <div class="review-product">XXL Gaming Mouse Pad</div>
+          </div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">
+          Mouse pad'im sipariş sonrası ertesi gün geldi, çok şaşırdım. Paketleme gerçekten özenli, ürün hasarsız teslim edildi. Yüzey kalitesi piyasadaki en iyi seçeneklerden biri.
+        </div>
+        <div class="review-verified">✓ Doğrulanmış Alışveriş</div>
+        <div class="review-date">19 Kasım 2024</div>
+      </div>
+
+      <div class="review-card fade-in">
+        <div class="review-header">
+          <div class="review-avatar">ES</div>
+          <div class="review-meta">
+            <div class="review-name">Emre S.</div>
+            <div class="review-product">Mekanik Klavye TKL</div>
+          </div>
+        </div>
+        <div class="review-stars">★★★★☆</div>
+        <div class="review-text">
+          Mekanik klavye kalitesi gerçekten çok iyi. Brown switch sesi beklediğimden sessiz çıktı, ofiste kullanmak için ideal. Tek eksiğim RGB yazılımının biraz daha gelişmiş olmasını isterdim.
+        </div>
+        <div class="review-verified">✓ Doğrulanmış Alışveriş</div>
+        <div class="review-date">5 Aralık 2024</div>
+      </div>
+
+      <div class="review-card fade-in">
+        <div class="review-header">
+          <div class="review-avatar">BT</div>
+          <div class="review-meta">
+            <div class="review-name">Burak T.</div>
+            <div class="review-product">Gaming Laptop RTX 4060</div>
+          </div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">
+          Laptopumu buradan aldım. Fiyat-performans açısından piyasadaki en iyi seçenek. Canlı destek ekibi konfigürasyon konusunda çok yardımcı oldu. Kesinlikle tekrar alışveriş yaparım!
+        </div>
+        <div class="review-verified">✓ Doğrulanmış Alışveriş</div>
+        <div class="review-date">22 Ocak 2025</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="site-logo" style="margin-bottom:.25rem">
+        <svg class="logo-crystal" viewBox="0 0 34 42" fill="none" width="28" height="28">
+          <path d="M17 2L31 10L25 14L17 11L9 14L3 10L17 2Z" fill="#DC2626"/>
+          <path d="M3 10L9 14V30L17 40L9 30V14L3 10Z" fill="#7F1D1D"/>
+          <path d="M31 10L25 14V30L17 40L25 30V14L31 10Z" fill="#991B1B"/>
+          <path d="M9 14L17 11L25 14L17 18L9 14Z" fill="#EF4444" opacity="0.8"/>
+        </svg>
+        <div class="logo-text-wrap">
+          <span class="logo-brand">Kuvars</span>
+          <span class="logo-sub">Teknoloji</span>
+        </div>
+      </a>
+      <p>Teknolojinin özünde, ihtiyacınızın tam kalbinde. Güvenilir, hızlı ve kaliteli alışveriş için doğru adres.</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Sayfalar</h4>
+      <ul>
+        <li><a href="index.html">Ana Sayfa</a></li>
+        <li><a href="kampanya.html">Kampanyalar</a></li>
+        <li><a href="urunler.html">Ürünler</a></li>
+        <li><a href="quiz.html">Ürün Bul</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Kategoriler</h4>
+      <ul>
+        <li><a href="#">Ekran</a></li>
+        <li><a href="#">Kulaklık</a></li>
+        <li><a href="#">Klavye</a></li>
+        <li><a href="#">Mouse</a></li>
+        <li><a href="#">Laptop</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Yardım</h4>
+      <ul>
+        <li><a href="#">İletişim</a></li>
+        <li><a href="#">İade & Değişim</a></li>
+        <li><a href="#">Teslimat Bilgisi</a></li>
+        <li><a href="#">Gizlilik Politikası</a></li>
+        <li><a href="#">Kullanım Şartları</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 Kuvars Teknoloji. Tüm hakları saklıdır.</p>
+    <div class="footer-social">
+      <a href="#" class="social-btn" title="Instagram">📷</a>
+      <a href="#" class="social-btn" title="Twitter/X">🐦</a>
+      <a href="#" class="social-btn" title="YouTube">▶️</a>
+      <a href="#" class="social-btn" title="Discord">💬</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

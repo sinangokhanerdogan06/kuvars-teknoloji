@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ürünler – Kuvars Teknoloji</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-main">
+    <a href="index.html" class="site-logo">
+      <svg class="logo-crystal" viewBox="0 0 34 42" fill="none" width="34" height="34">
+        <path d="M17 2L31 10L25 14L17 11L9 14L3 10L17 2Z" fill="#DC2626"/>
+        <path d="M3 10L9 14V30L17 40L9 30V14L3 10Z" fill="#7F1D1D"/>
+        <path d="M31 10L25 14V30L17 40L25 30V14L31 10Z" fill="#991B1B"/>
+        <path d="M9 14L17 11L25 14L17 18L9 14Z" fill="#EF4444" opacity="0.8"/>
+      </svg>
+      <div class="logo-text-wrap">
+        <span class="logo-brand">Kuvars</span>
+        <span class="logo-sub">Teknoloji</span>
+      </div>
+    </a>
+    <div class="search-bar">
+      <input type="search" placeholder="Ürün, kategori veya marka ara…" />
+      <button class="search-btn">🔍</button>
+    </div>
+    <div class="topbar-actions">
+      <button class="theme-toggle" id="themeToggle">☀️</button>
+      <button class="cart-btn">🛒<span class="cart-badge" id="cartBadge">0</span></button>
+      <a href="#" class="btn-login">Giriş Yap</a>
+      <a href="#" class="btn-register">Üye Ol</a>
+    </div>
+    <button class="hamburger"><span></span><span></span><span></span></button>
+  </div>
+  <nav class="subnav">
+    <ul>
+      <li><a href="index.html">Ana Sayfa</a></li>
+      <li><a href="kampanya.html">Kampanyalar</a></li>
+      <li><a href="urunler.html" class="active">Ürünler</a></li>
+      <li><a href="quiz.html">Ürün Bul</a></li>
+    </ul>
+  </nav>
+  <div class="mobile-menu">
+    <a href="index.html">🏠 Ana Sayfa</a>
+    <a href="kampanya.html">🎉 Kampanyalar</a>
+    <a href="urunler.html">🛍️ Ürünler</a>
+    <a href="quiz.html">🔍 Ürün Bul</a>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="hero-badge">🛍️ 2025 Koleksiyon</div>
+  <h1 class="page-title"><span>Kuvars</span> Ürünleri</h1>
+  <p class="page-sub">Kartların üzerine gelin — ürün özelliklerini keşfedin.</p>
+</div>
+
+<div class="section" style="padding-top:1rem">
+  <div class="filter-buttons">
+    <button class="filter-btn active" data-filter="all">Tümü</button>
+    <button class="filter-btn" data-filter="giyilebilir">Giyilebilir</button>
+    <button class="filter-btn" data-filter="ses">Ses</button>
+    <button class="filter-btn" data-filter="aksesuar">Aksesuar</button>
+  </div>
+
+  <div class="products-grid">
+    <div class="flip-card fade-in" data-category="giyilebilir">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=600&q=80" alt="Akıllı Bileklik" class="product-img"/>
+          <div class="product-info">
+            <div class="product-category">Giyilebilir</div>
+            <div class="product-name">Akıllı Bileklik Pro</div>
+            <div class="product-price">₺1.299</div>
+          </div>
+        </div>
+        <div class="flip-card-back">
+          <div class="back-title">Akıllı Bileklik Pro</div>
+          <ul class="back-features">
+            <li>Nabız &amp; SpO2 takibi</li>
+            <li>7 günlük pil ömrü</li>
+            <li>Su geçirmez IP68</li>
+            <li>Gelişmiş uyku analizi</li>
+            <li>GPS bağlantısı</li>
+          </ul>
+          <a href="quiz.html" class="btn-sm">Bana Uygun mu?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card fade-in" data-category="ses">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80" alt="Kablosuz Kulaklık" class="product-img"/>
+          <div class="product-info">
+            <div class="product-category">Ses</div>
+            <div class="product-name">Kablosuz Kulaklık X1</div>
+            <div class="product-price">₺2.499</div>
+          </div>
+        </div>
+        <div class="flip-card-back">
+          <div class="back-title">Kablosuz Kulaklık X1</div>
+          <ul class="back-features">
+            <li>Aktif Gürültü Önleme (ANC)</li>
+            <li>30 saat pil ömrü</li>
+            <li>Hi-Res Audio sertifikası</li>
+            <li>Çoklu cihaz bağlantısı</li>
+            <li>10 dk şarj = 3 saat</li>
+          </ul>
+          <a href="quiz.html" class="btn-sm">Bana Uygun mu?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card fade-in" data-category="ses">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=600&q=80" alt="Mini Hoparlör" class="product-img"/>
+          <div class="product-info">
+            <div class="product-category">Ses</div>
+            <div class="product-name">Mini Hoparlör Boom</div>
+            <div class="product-price">₺999</div>
+          </div>
+        </div>
+        <div class="flip-card-back">
+          <div class="back-title">Mini Hoparlör Boom</div>
+          <ul class="back-features">
+            <li>360° ses teknolojisi</li>
+            <li>IP67 su &amp; toz koruması</li>
+            <li>12 saat pil ömrü</li>
+            <li>Stereo çift bağlantı</li>
+            <li>RGB ışık efektleri</li>
+          </ul>
+          <a href="quiz.html" class="btn-sm">Bana Uygun mu?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card fade-in" data-category="aksesuar">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&q=80" alt="Mobil Aksesuar" class="product-img"/>
+          <div class="product-info">
+            <div class="product-category">Aksesuar</div>
+            <div class="product-name">Mobil Aksesuar Set</div>
+            <div class="product-price">₺599</div>
+          </div>
+        </div>
+        <div class="flip-card-back">
+          <div class="back-title">Mobil Aksesuar Set</div>
+          <ul class="back-features">
+            <li>Manyetik hızlı şarj standı</li>
+            <li>Örgülü USB-C kablo</li>
+            <li>Premium telefon kılıfı</li>
+            <li>Temperli cam koruyucu</li>
+            <li>Pop socket tutucu</li>
+          </ul>
+          <a href="quiz.html" class="btn-sm">Bana Uygun mu?</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center;padding:0 2rem 5rem">
+  <p style="color:var(--muted);margin-bottom:1.5rem;font-size:.93rem">Hangi ürünün sana uygun olduğundan emin değil misin?</p>
+  <a href="quiz.html" class="btn-primary">Sana En Uygun Ürünü Bul ✨</a>
+</div>
+
+<footer class="site-footer" style="padding:2rem">
+  <div class="footer-bottom" style="border:none;padding:0">
+    <p>© 2025 Kuvars Teknoloji. Tüm hakları saklıdır.</p>
+    <a href="index.html" style="font-size:.82rem;color:var(--red2)">Ana Sayfaya Dön →</a>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
