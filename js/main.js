@@ -389,6 +389,76 @@ function initQuiz() {
   render();
 }
 
+// ── ÜRÜN VERİTABANINDAN ÇEKME ────────────────────────────────────
+async function urunleriYukle() {
+  const grid = document.querySelector('.products-grid');
+  if (!grid) return;
+  try {
+    const response = await fetch('urunleri_getir.php');
+    const result = await response.json();
+    if (result.status === 'success') {
+      grid.innerHTML = '';
+      result.data.forEach(urun => {
+        const ozellikler = JSON.parse(urun.ozellikler);
+        const ozellikListesi = ozellikler.map(oz => `<li>${oz}</li>`).join('');
+        const kart = `
+        <div class="flip-card fade-in visible" data-category="${urun.kategori}">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="${urun.resim_url}" alt="${urun.isim}" class="product-img"/>
+              <div class="product-info">
+                <div class="product-category">${urun.kategori}</div>
+                <div class="product-name">${urun.isim}</div>
+                <div class="product-price">₺${urun.fiyat}</div>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <div class="back-title">${urun.isim}</div>
+              <ul class="back-features">${ozellikListesi}</ul>
+              <button class="btn-sm" data-add-cart="${urun.id}">Sepete Ekle</button>
+            </div>
+          </div>
+        </div>`;
+        grid.innerHTML += kart;
+      });
+      initProductFilter();
+      initCart();
+    }
+  } catch (error) {
+    console.error('Ürünler yüklenirken hata:', error);
+  }
+}
+
+// ── SEPETE EKLE ───────────────────────────────────────────────────
+const URUNLER = [
+  { id: 1, isim: "Kablosuz Kulaklık X1",  fiyat: 2499, resim: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80" },
+  { id: 2, isim: "Akıllı Bileklik Pro",   fiyat: 1299, resim: "https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=600&q=80" },
+  { id: 3, isim: "Mini Hoparlör Boom",    fiyat: 999,  resim: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=600&q=80" },
+  { id: 4, isim: "Mobil Aksesuar Set",    fiyat: 599,  resim: "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&q=80" }
+];
+
+function sepeteEkle(urunId) {
+  let sepet = JSON.parse(localStorage.getItem('sepet')) || [];
+  const urunBilgisi = URUNLER.find(u => u.id === urunId);
+  if (!urunBilgisi) return;
+  const sepettekiUrun = sepet.find(item => item.id === urunId);
+  if (sepettekiUrun) {
+    sepettekiUrun.miktar += 1;
+  } else {
+    sepet.push({ ...urunBilgisi, miktar: 1 });
+  }
+  localStorage.setItem('sepet', JSON.stringify(sepet));
+  // Rozeti güncelle
+  const badge = document.getElementById('cartBadge');
+  if (badge) {
+    const toplam = sepet.reduce((t, i) => t + i.miktar, 0);
+    badge.textContent = toplam;
+    badge.style.transform = 'scale(1.5)';
+    setTimeout(() => badge.style.transform = '', 300);
+  }
+  alert(urunBilgisi.isim + ' sepete eklendi!');
+}
+
 // ── BOOT ─────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
@@ -400,4 +470,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initProductFilter();
   initFinderQuiz();
   initQuiz();
+  urunleriYukle();
 });

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <title>Üye Ol – Kuvars Teknoloji</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="section" style="display:flex; justify-content:center; align-items:center; min-height:100vh;">
+    <div class="card" style="max-width:400px; width:100%;">
+      <h2 class="section-title" style="margin-bottom:1.5rem;">Kuvars'a <span>Katıl</span></h2>
+      <form id="registerForm">
+        <div style="margin-bottom:1rem;">
+          <input type="text" id="ad_soyad" placeholder="Ad Soyad" required style="width:100%; padding:0.8rem; background:var(--bg2); border:1px solid var(--border2); color:white; border-radius:8px;">
+        </div>
+        <div style="margin-bottom:1rem;">
+          <input type="email" id="email" placeholder="E-posta" required style="width:100%; padding:0.8rem; background:var(--bg2); border:1px solid var(--border2); color:white; border-radius:8px;">
+        </div>
+        <div style="margin-bottom:1.5rem;">
+          <input type="password" id="sifre" placeholder="Şifre" required style="width:100%; padding:0.8rem; background:var(--bg2); border:1px solid var(--border2); color:white; border-radius:8px;">
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%;">Hesap Oluştur</button>
+      </form>
+      <p id="mesaj" style="margin-top:1rem; font-size:0.9rem; text-align:center;"></p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const mesajEl = document.getElementById('mesaj');
+      
+      // Form verilerini alıyoruz
+      const formData = new FormData();
+      formData.append('ad_soyad', document.getElementById('ad_soyad').value);
+      formData.append('email', document.getElementById('email').value);
+      formData.append('sifre', document.getElementById('sifre').value);
+
+      try {
+        const response = await fetch('kayit_ol.php', {
+          method: 'POST',
+          body: formData
+        });
+        const result = await response.json();
+
+        if (result.status === 'success') {
+          mesajEl.style.color = '#22C55E';
+          mesajEl.textContent = "Başarıyla kayıt oldunuz! Giriş yapabilirsiniz.";
+          document.getElementById('registerForm').reset();
+        } else {
+          mesajEl.style.color = '#EF4444';
+          mesajEl.textContent = result.message;
+        }
+      } catch (error) {
+        mesajEl.textContent = "Bir hata oluştu.";
+      }
+    });
+  </script>
+</body>
+</html>
