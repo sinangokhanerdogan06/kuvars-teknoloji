@@ -427,8 +427,8 @@ img { max-width: 100%; display: block; }
 .cat-slider::-webkit-scrollbar { display: none; }
 
 .cat-flip-wrap {
-  flex: 0 0 148px;
-  height: 170px;
+  flex: 0 0 200px;
+  height: 220px;
   perspective: 700px;
   cursor: pointer;
   border-radius: 18px;
@@ -471,7 +471,7 @@ img { max-width: 100%; display: block; }
 
 .cat-flip-front .cat-img {
   width: 100%;
-  height: 116px;
+  height: 160px;
   object-fit: contain;
   border-radius: 14px 14px 0 0;
   padding: 10px 10px 4px;
