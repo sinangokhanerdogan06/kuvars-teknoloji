@@ -88,8 +88,8 @@ img { max-width: 100%; display: block; }
 }
 
 .logo-crystal {
-  width: 34px;
-  height: 34px;
+  width: 42px;
+  height: 42px;
   flex-shrink: 0;
 }
 
@@ -100,14 +100,14 @@ img { max-width: 100%; display: block; }
 }
 
 .logo-brand {
-  font-size: 1.05rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--text);
   letter-spacing: -0.02em;
 }
 
 .logo-sub {
-  font-size: 0.6rem;
+  font-size: 0.72rem;
   font-weight: 500;
   color: var(--red2);
   text-transform: uppercase;
@@ -260,8 +260,8 @@ img { max-width: 100%; display: block; }
 }
 .subnav ul li a {
   display: block;
-  padding: 0.55rem 1rem;
-  font-size: 0.85rem;
+  padding: 0.65rem 1.2rem;
+  font-size: 0.97rem;
   font-weight: 500;
   color: var(--muted);
   border-bottom: 2px solid transparent;
