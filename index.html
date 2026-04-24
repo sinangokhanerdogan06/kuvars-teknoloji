@@ -484,7 +484,7 @@
     mouseControls: true,
     touchControls: true,
     color: isLight ? 0x991b1b : 0xffffff,
-    backgroundColor: isLight ? 0xf5f0f0 : 0x410b0b,
+    backgroundColor: 0x410b0b,
     points: 10.00,
     maxDistance: 20.00,
     spacing: 15.00,
@@ -499,7 +499,7 @@
         const light = document.documentElement.getAttribute('data-theme') === 'light';
         vantaEffect.setOptions({
           color: light ? 0x991b1b : 0xffffff,
-          backgroundColor: light ? 0xf5f0f0 : 0x410b0b,
+          backgroundColor: 0x410b0b,
         });
       }, 50);
     });
