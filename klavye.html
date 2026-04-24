@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ürün Bul – Kuvars Teknoloji</title>
+  <title>Klavye – Kuvars Teknoloji</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -44,7 +44,7 @@
       <li><a href="index.html">Ana Sayfa</a></li>
       <li><a href="kampanya.html">Kampanyalar</a></li>
       <li><a href="urunler.html">Ürünler</a></li>
-      <li><a href="quiz.html" class="active">Ürün Bul</a></li>
+      <li><a href="quiz.html">Ürün Bul</a></li>
     </ul>
   </nav>
   <div class="mobile-menu">
@@ -56,15 +56,26 @@
 </header>
 
 <div class="page-hero">
-  <div class="hero-badge">🎯 Kişiselleştirilmiş Test</div>
-  <h1 class="page-title">Sana En Uygun <span>Ürünü Bul</span></h1>
-  <p class="page-sub">4 kısa soruyu yanıtla, senin için ideal ürünü birlikte bulalım!</p>
+  <div class="hero-badge">⌨️ Kategori</div>
+  <h1 class="page-title"><span>Klavye</span> Ürünleri</h1>
+  <p class="page-sub">Mekanik ve membran seçenekleriyle her ihtiyaca uygun klavyeler.</p>
 </div>
 
-<div class="section" style="padding-top:2rem;padding-bottom:5rem">
-  <div class="quiz-container">
-    <div id="quiz-app"></div>
+<div class="section" style="padding-top:1rem">
+  <div class="filter-buttons">
+    <button class="filter-btn active" data-filter="all">Tümü</button>
+    <button class="filter-btn" data-filter="mekanik">Mekanik</button>
+    <button class="filter-btn" data-filter="membran">Membran</button>
   </div>
+
+  <div class="products-grid">
+    <!-- Ürünler buraya eklenecek -->
+  </div>
+</div>
+
+<div style="text-align:center;padding:3rem 2rem 5rem">
+  <p style="color:var(--muted);margin-bottom:1.5rem;font-size:.93rem">Hangi ürünün sana uygun olduğundan emin değil misin?</p>
+  <a href="quiz.html" class="btn-primary">Sana En Uygun Ürünü Bul ✨</a>
 </div>
 
 <footer class="site-footer" style="padding:2rem">

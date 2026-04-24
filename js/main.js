@@ -19,22 +19,54 @@ function initTheme() {
   });
 }
 
+// ── KULLANICI DURUMU VE KARŞILAMA ─────────────────────────────────
+function initUserStatus() {
+  const authArea = document.getElementById('authArea');
+  const userName = localStorage.getItem('user_name');
+  if (authArea && userName) {
+    authArea.innerHTML = `
+      <span style="font-size:0.85rem;color:var(--muted);margin-right:5px;">Merhaba, <strong style="color:var(--red2);">${userName}</strong> 👋</span>
+      <button onclick="cikisYap()" class="btn-login" style="background:transparent;border:1px solid var(--border);cursor:pointer;padding:0.4rem 0.8rem;">Çıkış Yap</button>
+    `;
+  }
+}
+
+function cikisYap() {
+  if (confirm('Çıkış yapmak istediğinize emin misiniz?')) {
+    localStorage.removeItem('user_name');
+    window.location.reload();
+  }
+}
+
 // ── CART BADGE ────────────────────────────────────────────────────
 function initCart() {
   const badge = document.getElementById('cartBadge');
   if (!badge) return;
-  let count = parseInt(localStorage.getItem('kt-cart') || '0');
+  const sepet = JSON.parse(localStorage.getItem('sepet')) || [];
+  const count = sepet.reduce((acc, item) => acc + item.miktar, 0);
   badge.textContent = count;
+}
 
-  document.querySelectorAll('[data-add-cart]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      count++;
-      badge.textContent = count;
-      localStorage.setItem('kt-cart', count);
-      badge.style.transform = 'scale(1.5)';
-      setTimeout(() => badge.style.transform = '', 300);
-    });
+// ── ARAMA SİSTEMİ ─────────────────────────────────────────────────
+function initSearch() {
+  const searchInput = document.querySelector('.search-bar input');
+  const searchBtn = document.querySelector('.search-bar button');
+  if (!searchInput || !searchBtn) return;
+
+  function aramaYap() {
+    const kelime = searchInput.value.trim();
+    if (kelime) {
+      window.location.href = `urunler.html?arama=${encodeURIComponent(kelime)}`;
+    }
+  }
+
+  searchBtn.addEventListener('click', aramaYap);
+  searchInput.addEventListener('keypress', e => {
+    if (e.key === 'Enter') { e.preventDefault(); aramaYap(); }
   });
+
+  const aramaKelimesi = new URLSearchParams(window.location.search).get('arama');
+  if (aramaKelimesi) searchInput.value = aramaKelimesi;
 }
 
 // ── MOBILE MENU ───────────────────────────────────────────────────
@@ -389,7 +421,7 @@ function initQuiz() {
   render();
 }
 
-// ── ÜRÜN VERİTABANINDAN ÇEKME ────────────────────────────────────
+// ── ÜRÜN VERİTABANINDAN ÇEKME + ARAMA FİLTRESİ ──────────────────
 async function urunleriYukle() {
   const grid = document.querySelector('.products-grid');
   if (!grid) return;
@@ -398,9 +430,27 @@ async function urunleriYukle() {
     const result = await response.json();
     if (result.status === 'success') {
       grid.innerHTML = '';
-      result.data.forEach(urun => {
-        const ozellikler = JSON.parse(urun.ozellikler);
-        const ozellikListesi = ozellikler.map(oz => `<li>${oz}</li>`).join('');
+
+      const aramaKelimesi = new URLSearchParams(window.location.search).get('arama');
+      let urunler = result.data;
+
+      if (aramaKelimesi) {
+        const kucuk = aramaKelimesi.toLowerCase();
+        urunler = urunler.filter(u =>
+          u.isim.toLowerCase().includes(kucuk) ||
+          u.kategori.toLowerCase().includes(kucuk) ||
+          (u.marka && u.marka.toLowerCase().includes(kucuk))
+        );
+        if (urunler.length === 0) {
+          grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:4rem;color:var(--muted);font-size:1.2rem;">"${aramaKelimesi}" için sonuç bulunamadı. 😔</div>`;
+          return;
+        }
+      }
+
+      urunler.forEach(urun => {
+        let ozellikListesi = '';
+        try { ozellikListesi = JSON.parse(urun.ozellikler).map(oz => `<li>${oz}</li>`).join(''); } catch(e) {}
+        const isimSafe = urun.isim.replace(/'/g, "\\'");
         const kart = `
         <div class="flip-card fade-in visible" data-category="${urun.kategori}">
           <div class="flip-card-inner">
@@ -415,7 +465,7 @@ async function urunleriYukle() {
             <div class="flip-card-back">
               <div class="back-title">${urun.isim}</div>
               <ul class="back-features">${ozellikListesi}</ul>
-              <button class="btn-sm" data-add-cart="${urun.id}">Sepete Ekle</button>
+              <button class="btn-sm" onclick="gercekSepeteEkle('${urun.id}','${isimSafe}','${urun.fiyat}','${urun.resim_url}')">Sepete Ekle 🛒</button>
             </div>
           </div>
         </div>`;
@@ -429,40 +479,31 @@ async function urunleriYukle() {
   }
 }
 
-// ── SEPETE EKLE ───────────────────────────────────────────────────
-const URUNLER = [
-  { id: 1, isim: "Kablosuz Kulaklık X1",  fiyat: 2499, resim: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80" },
-  { id: 2, isim: "Akıllı Bileklik Pro",   fiyat: 1299, resim: "https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=600&q=80" },
-  { id: 3, isim: "Mini Hoparlör Boom",    fiyat: 999,  resim: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=600&q=80" },
-  { id: 4, isim: "Mobil Aksesuar Set",    fiyat: 599,  resim: "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&q=80" }
-];
-
-function sepeteEkle(urunId) {
+// ── SEPETE EKLE (veritabanı ürünleriyle çalışan) ──────────────────
+function gercekSepeteEkle(id, isim, fiyat, resim) {
   let sepet = JSON.parse(localStorage.getItem('sepet')) || [];
-  const urunBilgisi = URUNLER.find(u => u.id === urunId);
-  if (!urunBilgisi) return;
-  const sepettekiUrun = sepet.find(item => item.id === urunId);
-  if (sepettekiUrun) {
-    sepettekiUrun.miktar += 1;
+  const mevcut = sepet.find(item => item.id == id);
+  if (mevcut) {
+    mevcut.miktar += 1;
   } else {
-    sepet.push({ ...urunBilgisi, miktar: 1 });
+    sepet.push({ id, isim, fiyat: parseFloat(fiyat), resim, miktar: 1 });
   }
   localStorage.setItem('sepet', JSON.stringify(sepet));
-  // Rozeti güncelle
+  initCart();
   const badge = document.getElementById('cartBadge');
   if (badge) {
-    const toplam = sepet.reduce((t, i) => t + i.miktar, 0);
-    badge.textContent = toplam;
     badge.style.transform = 'scale(1.5)';
     setTimeout(() => badge.style.transform = '', 300);
   }
-  alert(urunBilgisi.isim + ' sepete eklendi!');
+  alert(isim + ' sepete eklendi!');
 }
 
 // ── BOOT ─────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
+  initUserStatus();
   initCart();
+  initSearch();
   initMobileMenu();
   initCategorySlider();
   initScrollAnimations();

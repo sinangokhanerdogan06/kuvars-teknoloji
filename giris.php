@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Kullanıcı bulunduysa ve GİRİLEN şifre veritabanındaki HASH'li şifreyle eşleşiyorsa
         if ($kullanici && password_verify($sifre, $kullanici['sifre'])) {
-            echo json_encode(["status" => "success"]);
+            echo json_encode(["status" => "success", "ad_soyad" => $kullanici['ad_soyad']]);
         } else {
             // Güvenlik gereği "E-posta yanlış" veya "Şifre yanlış" diye ayrı ayrı söylemeyiz, genel hata veririz.
             echo json_encode(["status" => "error", "message" => "Hatalı e-posta veya şifre."]);

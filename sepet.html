@@ -8,22 +8,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     .cart-container { max-width: 900px; margin: 120px auto; padding: 2rem; min-height: 70vh; }
-    .cart-item { 
+    .cart-item {
       display: flex; align-items: center; justify-content: space-between;
       background: var(--bg2); padding: 1.2rem; border-radius: 12px;
       margin-bottom: 1rem; border: 1px solid var(--border2); transition: 0.3s;
     }
     .cart-item:hover { border-color: var(--red2); }
-    .cart-item img { width: 70px; height: 70px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border1); }
+    .cart-item img { width: 70px; height: 70px; object-fit: contain; border-radius: 8px; border: 1px solid var(--border1); background: var(--bg1); }
     .cart-item-info { flex: 1; margin-left: 1.5rem; }
     .cart-qty-controls { display: flex; align-items: center; gap: 12px; background: var(--bg1); padding: 5px 12px; border-radius: 20px; }
     .qty-btn { background: none; border: none; color: white; cursor: pointer; font-size: 1.2rem; padding: 0 5px; }
-    .remove-btn { color: #EF4444; cursor: pointer; background: none; border: none; font-size: 1.2rem; margin-left: 1.5rem; }
-    .cart-summary { 
-      background: var(--bg2); padding: 2rem; border-radius: 15px; 
+    .remove-btn { color: #EF4444; cursor: pointer; background: none; border: none; font-size: 1.2rem; margin-left: 1.5rem; transition: transform 0.2s; }
+    .remove-btn:hover { transform: scale(1.2); }
+    .cart-summary {
+      background: var(--bg2); padding: 2rem; border-radius: 15px;
       margin-top: 2rem; border: 1px solid var(--border2); text-align: right;
     }
-    .total-price { color: var(--red2); font-size: 1.8rem; font-weight: 700; }
+    .total-price { color: var(--red2); font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem; }
+    .fake-credit-card {
+      background: linear-gradient(135deg, #f27121, #e94057);
+      padding: 1.2rem; border-radius: 12px; margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 15px;
+      color: white; box-shadow: 0 8px 20px rgba(242,113,33,0.3); text-align: left;
+    }
   </style>
 </head>
 <body>
@@ -33,6 +40,16 @@
     <a href="index.html" class="site-logo">
       <div class="logo-text-wrap"><span class="logo-brand">Kuvars</span></div>
     </a>
+
+    <div class="topbar-actions" style="margin-left:auto;">
+      <button class="theme-toggle" id="themeToggle" title="Tema Değiştir">☀️</button>
+      <a href="sepet.html" class="cart-btn" style="text-decoration:none;">🛒<span class="cart-badge" id="cartBadge">0</span></a>
+      <div id="authArea" style="display:flex;gap:0.75rem;align-items:center;">
+        <a href="giris.html" class="btn-login">Giriş Yap</a>
+        <a href="uye_ol.html" class="btn-register">Üye Ol</a>
+      </div>
+    </div>
+
     <nav class="subnav">
       <ul>
         <li><a href="index.html">Ana Sayfa</a></li>
@@ -43,42 +60,47 @@
 </header>
 
 <div class="cart-container">
-  <h1 class="page-title" style="text-align: left; margin-bottom: 2rem;">Sepet <span>Detayı</span></h1>
-  
+  <h1 class="page-title" style="text-align:left;margin-bottom:2rem;">Sepet <span>Detayı</span></h1>
+
   <div id="sepetIcerik"></div>
 
-  <div id="sepetOzetAlani" class="cart-summary" style="display: none;">
-    <p style="color: var(--muted); margin-bottom: 0.5rem;">Ödenecek Toplam Tutar</p>
+  <div id="sepetOzetAlani" class="cart-summary" style="display:none;">
+
+    <div class="fake-credit-card">
+      <div style="font-size:2.5rem;line-height:1;">💳</div>
+      <div style="flex:1;">
+        <div style="font-weight:800;font-size:1.2rem;letter-spacing:2px;font-style:italic;">VISA</div>
+        <div style="font-size:0.9rem;font-weight:500;opacity:0.9;margin-top:2px;">**** **** **** 4242</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:0.75rem;font-weight:600;opacity:0.8;text-transform:uppercase;">Kayıtlı Kart</div>
+        <div style="font-size:0.85rem;font-weight:700;margin-top:2px;">08/28</div>
+      </div>
+    </div>
+
+    <p style="color:var(--muted);margin-bottom:0.5rem;">Ödenecek Toplam Tutar</p>
     <div class="total-price"><span id="toplamTutar">0</span> ₺</div>
-    <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 15px;">
-        <button class="remove-btn" onclick="sepetiSifirla()" style="font-size: 0.9rem;">Sepeti Temizle</button>
-        <button class="btn-primary" onclick="odemeYap()">Siparişi Tamamla ✨</button>
+
+    <div style="display:flex;justify-content:flex-end;gap:15px;">
+      <button class="remove-btn" onclick="sepetiSifirla()" style="font-size:0.9rem;">Sepeti Temizle</button>
+      <button class="btn-primary" onclick="odemeYap()">Siparişi Tamamla ✨</button>
     </div>
   </div>
 </div>
 
+<script src="js/main.js"></script>
 <script>
-  // MERKEZİ VERİ LİSTESİ (ID Eşleşmesi için şart)
-  const URUNLER_DATA = [
-    { id: 1, isim: "Akıllı Bileklik Pro", fiyat: 1299, resim: "https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=600&q=80" },
-    { id: 2, isim: "Kablosuz Kulaklık X1", fiyat: 2499, resim: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80" },
-    { id: 3, isim: "Mini Hoparlör Boom", fiyat: 999, resim: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=600&q=80" },
-    { id: 4, isim: "Mobil Aksesuar Set", fiyat: 599, resim: "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&q=80" }
-  ];
-
   function sepetiGoster() {
-    // ÖNEMLİ: urunler.html'de sepete eklerken hangi ismi kullandıysan o olmalı.
-    // Eğer orada 'kt-cart' ise burayı da 'kt-cart' yapmalısın. Şimdilik 'sepet' kalıyor.
-    const sepet = JSON.parse(localStorage.getItem('sepet')) || []; 
+    const sepet = JSON.parse(localStorage.getItem('sepet')) || [];
     const liste = document.getElementById('sepetIcerik');
     const ozet = document.getElementById('sepetOzetAlani');
     const toplamEl = document.getElementById('toplamTutar');
 
     if (sepet.length === 0) {
       liste.innerHTML = `
-        <div style="text-align:center; padding: 4rem;">
-          <h2 style="color: var(--muted);">Sepetiniz Boş 🛒</h2>
-          <p style="margin: 1rem 0 2rem;">Henüz bir teknoloji harikası seçmemişsiniz.</p>
+        <div style="text-align:center;padding:4rem;">
+          <h2 style="color:var(--muted);">Sepetiniz Boş 🛒</h2>
+          <p style="margin:1rem 0 2rem;">Henüz bir teknoloji harikası seçmemişsiniz.</p>
           <a href="urunler.html" class="btn-primary">Ürünlere Göz At</a>
         </div>`;
       ozet.style.display = 'none';
@@ -89,58 +111,55 @@
     let toplam = 0;
 
     liste.innerHTML = sepet.map(item => {
-      // ID'yi sayıya çevirerek karşılaştırıyoruz
-      const urunBilgisi = URUNLER_DATA.find(u => u.id === parseInt(item.id));
-      
-      if (!urunBilgisi) return ''; // Listedeki ürünle eşleşmezse boş dön
-
-      toplam += urunBilgisi.fiyat * item.miktar;
-      
+      const fiyat = parseFloat(item.fiyat) || 0;
+      toplam += fiyat * item.miktar;
       return `
         <div class="cart-item">
-          <img src="${urunBilgisi.resim}" alt="${urunBilgisi.isim}">
+          <img src="${item.resim}" alt="${item.isim}">
           <div class="cart-item-info">
-            <h3 style="font-size: 1.1rem;">${urunBilgisi.isim}</h3>
-            <p style="color: var(--muted); font-size: 0.9rem;">Birim Fiyat: ${urunBilgisi.fiyat} ₺</p>
+            <h3 style="font-size:1.1rem;">${item.isim}</h3>
+            <p style="color:var(--muted);font-size:0.9rem;">Birim Fiyat: ${fiyat.toLocaleString('tr-TR')} ₺</p>
           </div>
           <div class="cart-qty-controls">
-            <button class="qty-btn" onclick="miktarGuncelle(${item.id}, -1)">-</button>
-            <span style="font-weight: 600; width: 20px; text-align: center;">${item.miktar}</span>
-            <button class="qty-btn" onclick="miktarGuncelle(${item.id}, 1)">+</button>
+            <button class="qty-btn" onclick="miktarGuncelle('${item.id}', -1)">-</button>
+            <span style="font-weight:600;width:20px;text-align:center;">${item.miktar}</span>
+            <button class="qty-btn" onclick="miktarGuncelle('${item.id}', 1)">+</button>
           </div>
-          <div style="margin-left: 2rem; font-weight: 700; width: 100px; text-align: right;">
-            ${(urunBilgisi.fiyat * item.miktar).toLocaleString('tr-TR')} ₺
+          <div style="margin-left:2rem;font-weight:700;width:100px;text-align:right;">
+            ${(fiyat * item.miktar).toLocaleString('tr-TR')} ₺
           </div>
-          <button class="remove-btn" onclick="urunKaldir(${item.id})">✕</button>
-        </div>
-      `;
+          <button class="remove-btn" onclick="urunKaldir('${item.id}')">✕</button>
+        </div>`;
     }).join('');
 
     toplamEl.textContent = toplam.toLocaleString('tr-TR');
   }
 
-  function miktarGuncelle(id, miktar) {
+  function miktarGuncelle(id, delta) {
     let sepet = JSON.parse(localStorage.getItem('sepet')) || [];
-    const urun = sepet.find(u => u.id === id);
+    const urun = sepet.find(u => u.id == id);
     if (urun) {
-      urun.miktar += miktar;
+      urun.miktar += delta;
       if (urun.miktar < 1) urun.miktar = 1;
       localStorage.setItem('sepet', JSON.stringify(sepet));
       sepetiGoster();
+      initCart();
     }
   }
 
   function urunKaldir(id) {
     let sepet = JSON.parse(localStorage.getItem('sepet')) || [];
-    sepet = sepet.filter(u => u.id !== id);
+    sepet = sepet.filter(u => u.id != id);
     localStorage.setItem('sepet', JSON.stringify(sepet));
     sepetiGoster();
+    initCart();
   }
 
   function sepetiSifirla() {
-    if(confirm("Tüm sepeti boşaltmak istediğine emin misin?")) {
-        localStorage.removeItem('sepet');
-        sepetiGoster();
+    if (confirm('Tüm sepeti boşaltmak istediğine emin misin?')) {
+      localStorage.removeItem('sepet');
+      sepetiGoster();
+      initCart();
     }
   }
 
@@ -150,7 +169,6 @@
     window.location.href = 'index.html';
   }
 
-  // Sayfa yüklendiğinde sepeti listele
   document.addEventListener('DOMContentLoaded', sepetiGoster);
 </script>
 
