@@ -396,7 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initCategorySlider();
   initScrollAnimations();
-  initCountdown('2025-12-31T23:59:59');
+  initCountdown('2026-04-27T23:59:59');
   initProductFilter();
   initFinderQuiz();
   initQuiz();
