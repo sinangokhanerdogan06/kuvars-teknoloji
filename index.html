@@ -10,55 +10,18 @@
   <link rel="stylesheet" href="css/style.css" />
   <style>
     #vanta-background {
-      position: relative;
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: 88vh;
-    }
-    .vanta-content {
-      position: relative;
-      z-index: 10;
       height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1.5rem;
-      text-align: center;
-      padding: 2rem;
+      z-index: -1;
     }
-    .vanta-content h1 {
-      color: #ffffff;
-      font-size: clamp(2rem, 5vw, 4rem);
-      font-weight: 700;
-      line-height: 1.2;
-      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
-    }
-    .vanta-content p {
-      color: rgba(255,255,255,0.85);
-      font-size: clamp(1rem, 2vw, 1.3rem);
-      max-width: 560px;
-    }
-    .vanta-content .vanta-btns {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 0.5rem;
-    }
-    .vanta-content .vanta-btns a {
-      padding: 0.8rem 2rem;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 1rem;
-      text-decoration: none;
-      transition: opacity 0.2s;
-    }
-    .vanta-content .vanta-btns a:hover { opacity: 0.85; }
-    .vanta-btn-primary { background: #fff; color: #893d3d; }
-    .vanta-btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.7); }
   </style>
 </head>
 <body>
+
+<div id="vanta-background"></div>
 
 <!-- ════════════════════════════════════════
      TOPBAR
@@ -126,20 +89,6 @@
     <a href="uye_ol.html" style="color:var(--red2)">✨ Üye Ol</a>
   </div>
 </header>
-
-<!-- ════════════════════════════════════════
-     VANTA HERO
-════════════════════════════════════════ -->
-<div id="vanta-background">
-  <div class="vanta-content">
-    <h1>Teknolojinin Özünde</h1>
-    <p>Gaming'den ofise, kulaklıktan laptofa — en iyi ürünler Kuvars Teknoloji'de.</p>
-    <div class="vanta-btns">
-      <a href="urunler.html" class="vanta-btn-primary">Ürünleri Keşfet</a>
-      <a href="quiz.html" class="vanta-btn-outline">Ürün Bul ✨</a>
-    </div>
-  </div>
-</div>
 
 <!-- ════════════════════════════════════════
      CAMPAIGN BANNER (placeholder)
