@@ -547,52 +547,39 @@ function gercekSepeteEkle(id, isim, fiyat, resim) {
 }
 
 // ── BİLDİRİM ZİLİ ────────────────────────────────────────────────
-async function initNotifications() {
+function initNotifications() {
   const actions = document.querySelector('.topbar-actions');
   if (!actions) return;
-  try {
-    const res = await fetch('indirimleri_getir.php');
-    const result = await res.json();
-    if (result.status !== 'success') return;
-    const indirimler = result.data || [];
 
-    // Kullanıcıya özel indirim varsa en üste ekle
-    const kisiselYuzde = localStorage.getItem('indirim_yuzde');
-    const kisiselMesaj = localStorage.getItem('indirim_mesaj');
-    const userName = localStorage.getItem('user_name');
+  const kisiselYuzde = localStorage.getItem('indirim_yuzde');
+  const kisiselMesaj = localStorage.getItem('indirim_mesaj');
+  const userName = localStorage.getItem('user_name');
 
-    let kisiselHTML = '';
-    if (userName && kisiselYuzde && parseInt(kisiselYuzde) > 0) {
-      kisiselHTML = `
-        <div class="notif-item" style="background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.3);">
-          <span class="notif-pct" style="background:linear-gradient(135deg,#16a34a,#22c55e);">%${kisiselYuzde}</span>
-          <span class="notif-msg"><strong>Sana Özel!</strong><br>${kisiselMesaj || 'Kişisel indiriminiz sepete otomatik uygulandı.'}</span>
-        </div>`;
-    }
+  if (!userName || !kisiselYuzde || parseInt(kisiselYuzde) <= 0) return;
 
-    if (!kisiselHTML) return;
+  const wrap = document.createElement('div');
+  wrap.className = 'notif-wrap';
+  wrap.innerHTML = `
+    <button class="notif-btn" id="notifBtn">🔔<span class="notif-badge">1</span></button>
+    <div class="notif-dropdown" id="notifDropdown">
+      <div class="notif-header">🎁 Kişisel Kuponunuz</div>
+      <div class="notif-item" style="background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.3);">
+        <span class="notif-pct" style="background:linear-gradient(135deg,#16a34a,#22c55e);">%${kisiselYuzde}</span>
+        <span class="notif-msg"><strong>Sana Özel!</strong><br>${kisiselMesaj || 'Kişisel indiriminiz sepete otomatik uygulandı.'}</span>
+      </div>
+    </div>`;
 
-    const wrap = document.createElement('div');
-    wrap.className = 'notif-wrap';
-    wrap.innerHTML = `
-      <button class="notif-btn" id="notifBtn">🔔<span class="notif-badge">1</span></button>
-      <div class="notif-dropdown" id="notifDropdown">
-        <div class="notif-header">🎁 Kişisel Kuponunuz</div>
-        ${kisiselHTML}
-      </div>`;
+  const cartBtn = actions.querySelector('.cart-btn');
+  actions.insertBefore(wrap, cartBtn);
 
-    const cartBtn = actions.querySelector('.cart-btn');
-    actions.insertBefore(wrap, cartBtn);
-
-    document.getElementById('notifBtn').addEventListener('click', (e) => {
-      e.stopPropagation();
-      document.getElementById('notifDropdown').classList.toggle('open');
-    });
-    document.addEventListener('click', () => {
-      const dd = document.getElementById('notifDropdown');
-      if (dd) dd.classList.remove('open');
-    });
-  } catch(e) {}
+  document.getElementById('notifBtn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    document.getElementById('notifDropdown').classList.toggle('open');
+  });
+  document.addEventListener('click', () => {
+    const dd = document.getElementById('notifDropdown');
+    if (dd) dd.classList.remove('open');
+  });
 }
 
 // ── BOOT ─────────────────────────────────────────────────────────
