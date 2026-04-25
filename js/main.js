@@ -189,71 +189,88 @@ function initFinderQuiz() {
   const steps = [
     {
       label: 'Adım 1 / 3',
-      q: 'Ne amaçla kullanacaksınız?',
+      q: 'Ürünü ne amaçla kullanacaksınız?',
       opts: [
-        { icon: '🎮', label: 'Oyun & Espor',   key: 'gaming' },
-        { icon: '💼', label: 'İş & Ofis',       key: 'office' },
-        { icon: '🎵', label: 'Müzik & Ses',     key: 'music' },
-        { icon: '🎨', label: 'Tasarım & İçerik', key: 'creative' },
+        { icon: '🎮', label: 'Oyun & Espor',     key: 'gaming' },
+        { icon: '💼', label: 'Ofis & Çalışma',   key: 'ofis' },
+        { icon: '🎵', label: 'Müzik & Eğlence',  key: 'muzik' },
+        { icon: '🔄', label: 'Genel Kullanım',   key: 'genel' },
       ]
     },
     {
       label: 'Adım 2 / 3',
-      q: 'Kullanım alanınız hangisi?',
+      q: 'Hangi ürün kategorisiyle ilgileniyorsunuz?',
       opts: [
-        { icon: '🖥️', label: 'Masaüstü Kurulum', key: 'desktop' },
-        { icon: '💻', label: 'Taşınabilir',       key: 'mobile' },
-        { icon: '🔄', label: 'İkisi de',           key: 'both' },
+        { icon: '💻', label: 'Laptop',             key: 'laptop' },
+        { icon: '🖥️', label: 'Ekran / Monitör',   key: 'ekran' },
+        { icon: '⌨️', label: 'Klavye & Mouse',    key: 'periferal' },
+        { icon: '🎧', label: 'Kulaklık',           key: 'kulaklik' },
       ]
     },
     {
       label: 'Adım 3 / 3',
       q: 'Bütçe aralığınız nedir?',
       opts: [
-        { icon: '💚', label: 'Ekonomik\n(0 – 3.000 ₺)',  key: 'budget' },
-        { icon: '💛', label: 'Orta\n(3.000 – 8.000 ₺)', key: 'mid' },
-        { icon: '🔴', label: 'Premium\n(8.000 ₺+)',       key: 'high' },
+        { icon: '💚', label: 'Ekonomik\n(0 – 3.000 ₺)',    key: 'budget' },
+        { icon: '💛', label: 'Orta\n(3.000 – 15.000 ₺)',   key: 'mid' },
+        { icon: '🔴', label: 'Premium\n(15.000 ₺+)',        key: 'high' },
       ]
     }
   ];
 
   const results = {
-    'gaming-desktop-budget':  { icon:'🖱️', title:'Gaming Mouse + Mouse Pad', desc:'Masaüstü oyun kurulumunuz için yüksek hassasiyetli gaming mouse ve hızlı yüzey sağlayan mouse pad ikilisi tam size göre.', cat:'mouse' },
-    'gaming-desktop-mid':     { icon:'⌨️', title:'Mekanik Klavye + Gaming Mouse', desc:'Performans odaklı oyun kurulumu için mekanik tuş hissi ve hassas optik sensör birlikteliği.', cat:'klavye' },
-    'gaming-desktop-high':    { icon:'🖥️', title:'Yüksek Hz Oyun Monitörü', desc:'144Hz ve üzeri yenileme hızı ile rekabetçi oyunlarda üst düzey görsel performans.', cat:'ekran' },
-    'gaming-mobile-budget':   { icon:'🎧', label:'Hafif Gaming Kulaklık', desc:'Taşınabilir oyun deneyimi için hafif ve rahat gaming kulaklık.', cat:'kulaklik' },
-    'gaming-mobile-mid':      { icon:'💻', title:'Gaming Laptop', desc:'Her yerde oyun oynamak için yüksek performanslı ekran kartı ve hızlı yenileme hızlı ekranıyla gaming laptop.', cat:'laptop' },
-    'gaming-mobile-high':     { icon:'💻', title:'Premium Gaming Laptop', desc:'RTX serisi ekran kartı, QHD ekran ve ultra hız — oyunculuğun zirvesi.', cat:'laptop' },
-    'gaming-both-budget':     { icon:'🖱️', title:'Kablosuz Gaming Mouse', desc:'Masaüstü ve taşınabilir kullanım için ideal kablosuz gaming mouse.', cat:'mouse' },
-    'gaming-both-mid':        { icon:'💻', title:'Gaming Laptop + Aksesuar', desc:'Hem evde hem dışarıda güçlü performans için gaming laptop ve taşınabilir aksesuar seti.', cat:'laptop' },
-    'gaming-both-high':       { icon:'💻', title:'Üst Segment Gaming Laptop', desc:'Her ortamda ödün vermeden oyun deneyimi için amiral gemisi gaming laptop.', cat:'laptop' },
-    'office-desktop-budget':  { icon:'⌨️', title:'Sessiz Ofis Klavyesi', desc:'Uzun çalışma saatleri için ergonomik ve sessiz ofis klavyesi.', cat:'klavye' },
-    'office-desktop-mid':     { icon:'🖥️', title:'IPS Ofis Monitörü', desc:'Renk doğruluğu yüksek, göz yorgunluğunu azaltan IPS panel ofis monitörü.', cat:'ekran' },
-    'office-desktop-high':    { icon:'🖥️', title:'4K Çift Monitör Kurulumu', desc:'Verimlilik odaklı 4K çözünürlük ve geniş renk gamı ile profesyonel çalışma ortamı.', cat:'ekran' },
-    'office-mobile-budget':   { icon:'💻', title:'İş Laptopu', desc:'Hafif gövde, uzun pil ve güçlü işlemci ile her yerde çalışmak için iş laptopu.', cat:'laptop' },
-    'office-mobile-mid':      { icon:'💻', title:'Ultrabook', desc:'İnce, hafif ve güçlü — iş yolculukları için ideal ultrabook.', cat:'laptop' },
-    'office-mobile-high':     { icon:'💻', title:'Premium İş Laptopu', desc:'Uzun pil, OLED ekran ve kurumsal güvenlik özellikleri ile premium iş laptopu.', cat:'laptop' },
-    'office-both-budget':     { icon:'🖱️', title:'Kablosuz Ofis Mouse', desc:'Hem masaüstünde hem de seyahatte rahat kullanım için ergonomik kablosuz mouse.', cat:'mouse' },
-    'office-both-mid':        { icon:'⌨️', title:'Kablosuz Klavye + Mouse Set', desc:'Çok cihazlı bağlantı ile ofis ve taşınabilir kullanım için kablosuz set.', cat:'klavye' },
-    'office-both-high':       { icon:'💻', title:'Yüksek Performans Ultrabook', desc:'En ince gövde, en uzun pil, maksimum işlemci gücü — hibrit çalışmanın zirvesi.', cat:'laptop' },
-    'music-desktop-budget':   { icon:'🎧', title:'Kablolu Stüdyo Kulaklık', desc:'Müziği detaylı analiz etmek ve dinlemek için geniş ses sahnesi sunan stüdyo kulaklık.', cat:'kulaklik' },
-    'music-desktop-mid':      { icon:'🎧', title:'Hi-Fi Kulaklık', desc:'Yüksek çözünürlüklü ses ve doğal müzik deneyimi için Hi-Res Audio sertifikalı kulaklık.', cat:'kulaklik' },
-    'music-desktop-high':     { icon:'🎧', title:'Premium Referans Kulaklık', desc:'Stüdyo kalitesinde müzik dinleme deneyimi için açık kulak premium kulaklık.', cat:'kulaklik' },
-    'music-mobile-budget':    { icon:'🎧', title:'TWS Kablosuz Kulaklık', desc:'Günlük kullanım için kompakt, kablosuz ve ANC özellikli kulaklık.', cat:'kulaklik' },
-    'music-mobile-mid':       { icon:'🎧', title:'Kablosuz ANC Kulaklık', desc:'Aktif gürültü önleme ile seyahatte ve dışarıda mükemmel müzik deneyimi.', cat:'kulaklik' },
-    'music-mobile-high':      { icon:'🎧', title:'Premium TWS + Boyun Bandı Set', desc:'Farklı durumlar için iki farklı kulaklık — TWS ve boyun bandı en iyi kombinasyonu.', cat:'kulaklik' },
-    'music-both-budget':      { icon:'🎧', title:'Çok Amaçlı Kulaklık', desc:'Hem evde hem dışarıda kaliteli ses için USB-C ve kablosuz bağlantılı kulaklık.', cat:'kulaklik' },
-    'music-both-mid':         { icon:'🎧', title:'Hibrit Kulaklık Seti', desc:'Kablolu + Bluetooth seçeneği ile her ortama uyum sağlayan premium kulaklık.', cat:'kulaklik' },
-    'music-both-high':        { icon:'🎧', title:'Audiophile Kulaklık', desc:'En yüksek ses kalitesi arayanlar için sınıf en iyisi akustik performans.', cat:'kulaklik' },
-    'creative-desktop-budget':{ icon:'🖥️', title:'IPS Renk Kalibreli Monitör', desc:'Grafik çalışmaları için doğru renk üretimi ve geniş görüş açısı sunan IPS monitör.', cat:'ekran' },
-    'creative-desktop-mid':   { icon:'🖥️', title:'2K QHD Tasarım Monitörü', desc:'sRGB %100, 2K çözünürlük ve geniş renk gamı ile yaratıcı çalışmalar için ideal.', cat:'ekran' },
-    'creative-desktop-high':  { icon:'🖥️', title:'4K OLED Profesyonel Monitör', desc:'Adobe RGB %99 ve OLED panel ile renk kritik iş akışı için referans monitör.', cat:'ekran' },
-    'creative-mobile-budget': { icon:'💻', title:'Tasarım Laptopu', desc:'Renk kalibreli ekran ve güçlü GPU ile yaratıcı çalışmalar için taşınabilir laptop.', cat:'laptop' },
-    'creative-mobile-mid':    { icon:'💻', title:'İçerik Üretici Laptop', desc:'Renk doğruluğu yüksek ekran, hızlı işlemci ve NVMe SSD ile içerik üretimi laptopu.', cat:'laptop' },
-    'creative-mobile-high':   { icon:'💻', title:'Profesyonel Yaratıcı Laptop', desc:'M-serisi çip veya RTX GPU, mini-LED ekran ile profesyonel yaratıcı iş akışı.', cat:'laptop' },
-    'creative-both-budget':   { icon:'⌨️', title:'Grafik Tablet + Klavye', desc:'Dijital çizim ve verimli kısayol kullanımı için grafik tablet ve kompakt klavye.', cat:'klavye' },
-    'creative-both-mid':      { icon:'💻', title:'Yaratıcı Laptop + Monitör', desc:'Taşınabilir yaratıcı çalışmalar için laptop, evde ek monitör ile genişletilebilir kurulum.', cat:'laptop' },
-    'creative-both-high':     { icon:'💻', title:'Üst Segment Yaratıcı Laptop', desc:'Her ortamda profesyonel renk yönetimi ve maksimum işlemci gücü ile amiral gemisi laptop.', cat:'laptop' },
+    // GAMING
+    'gaming-laptop-budget':    { icon:'💻', title:'Kuvars D16 2026 V2',               price:'34.999 ₺', desc:'Intel i9, 512GB SSD ve 18 saat pil ömrüyle her ortamda güçlü performans.', link:'urun_detay.php?id=10', cat:'laptop' },
+    'gaming-laptop-mid':       { icon:'💻', title:'Kuvars ROG Strix G15 Gaming Laptop', price:'42.999 ₺', desc:'RTX 3070 Ti, 300Hz FHD ekran ve RGB klavye ile üst düzey gaming deneyimi.', link:'urun_detay.php?id=8', cat:'laptop' },
+    'gaming-laptop-high':      { icon:'💻', title:'Kuvars Tulpar T6 V3.4.9',           price:'54.999 ₺', desc:'RTX 5060, 32GB DDR5, 1TB SSD — maksimum güç ve hız isteyen oyuncular için.', link:'urun_detay.php?id=9', cat:'laptop' },
+    'gaming-ekran-budget':     { icon:'🖥️', title:'Kuvars UltraGear 27" 144Hz',       price:'18.499 ₺', desc:'OLED panel ve 144Hz yenileme hızıyla keskin, akıcı oyun görüntüsü.', link:'urun_detay.php?id=1', cat:'ekran' },
+    'gaming-ekran-mid':        { icon:'🖥️', title:'Kuvars UltraGear 27" 144Hz',       price:'18.499 ₺', desc:'OLED panel ve 144Hz yenileme hızıyla keskin, akıcı oyun görüntüsü.', link:'urun_detay.php?id=1', cat:'ekran' },
+    'gaming-ekran-high':       { icon:'🖥️', title:'Kuvars S2722DGM 27" 360Hz',        price:'24.999 ₺', desc:'360Hz IPS panel ve 0.05ms tepki süresiyle espor seviyesi görsel performans.', link:'urun_detay.php?id=2', cat:'ekran' },
+    'gaming-periferal-budget': { icon:'⌨️', title:'Kuvars K552 Mekanik Gaming Klavye', price:'2.299 ₺',  desc:'Blue switch, RGB aydınlatma ve TKL kompakt tasarımla oyunlarda hız ve konfor.', link:'urun_detay.php?id=3', cat:'klavye' },
+    'gaming-periferal-mid':    { icon:'🖱️', title:'Kuvars G502 X Gaming Mouse',       price:'4.899 ₺',  desc:'25.600 DPI HERO sensör, 13 programlanabilir tuş ve RGB ile FPS\'te tam kontrol.', link:'urun_detay.php?id=11', cat:'mouse' },
+    'gaming-periferal-high':   { icon:'🖱️', title:'Kuvars DeathAdder V3 Pro Wireless',price:'4.299 ₺',  desc:'Kablosuz 30.000 DPI, 64g ultra hafif tasarım ve 90 saat pil ömrü.', link:'urun_detay.php?id=12', cat:'mouse' },
+    'gaming-kulaklik-budget':  { icon:'🎧', title:'Kuvars Tune 230NC TWS',             price:'1.599 ₺',  desc:'ANC, 40 saat pil ve Bluetooth 5.2 ile taşınabilir gaming ses deneyimi.', link:'urun_detay.php?id=7', cat:'kulaklik' },
+    'gaming-kulaklik-mid':     { icon:'🎧', title:'Kuvars Cloud II Gaming Kulaklık',   price:'3.199 ₺',  desc:'7.1 Surround ses, 53mm sürücüler ve gürültü önleyici mikrofon ile tam dalmak.', link:'urun_detay.php?id=5', cat:'kulaklik' },
+    'gaming-kulaklik-high':    { icon:'🎧', title:'Kuvars Arctis 7 Wireless Kulaklık', price:'9.299 ₺',  desc:'Kablosuz, 24 saat pil, lossless ses kalitesi ve ChatMix kadranı — premium gaming ses.', link:'urun_detay.php?id=6', cat:'kulaklik' },
+    // OFİS
+    'ofis-laptop-budget':      { icon:'💻', title:'Kuvars D16 2026 V2',               price:'34.999 ₺', desc:'İnce ultrabook tasarım, Windows 11 Pro ve 18 saat pil ömrüyle iş her yerde.', link:'urun_detay.php?id=10', cat:'laptop' },
+    'ofis-laptop-mid':         { icon:'💻', title:'Kuvars D16 2026 V2',               price:'34.999 ₺', desc:'İnce ultrabook tasarım, Windows 11 Pro ve 18 saat pil ömrüyle iş her yerde.', link:'urun_detay.php?id=10', cat:'laptop' },
+    'ofis-laptop-high':        { icon:'💻', title:'Kuvars ROG Strix G15 Gaming Laptop', price:'42.999 ₺', desc:'Güçlü işlemci ve büyük ekranıyla yoğun iş temposuna ve çok görevliliğe ideal.', link:'urun_detay.php?id=8', cat:'laptop' },
+    'ofis-ekran-budget':       { icon:'🖥️', title:'Kuvars UltraGear 27" 144Hz',       price:'18.499 ₺', desc:'OLED panel ile göz yorulmayan, canlı renkli çalışma ekranı.', link:'urun_detay.php?id=1', cat:'ekran' },
+    'ofis-ekran-mid':          { icon:'🖥️', title:'Kuvars UltraGear 27" 144Hz',       price:'18.499 ₺', desc:'OLED panel ile göz yorulmayan, canlı renkli çalışma ekranı.', link:'urun_detay.php?id=1', cat:'ekran' },
+    'ofis-ekran-high':         { icon:'🖥️', title:'Kuvars S2722DGM 27" 360Hz',        price:'24.999 ₺', desc:'Yüksek renk doğruluğu ve geniş çalışma alanıyla profesyonel verimlilik.', link:'urun_detay.php?id=2', cat:'ekran' },
+    'ofis-periferal-budget':   { icon:'🖱️', title:'Kuvars Sculpt Ergonomic Ofis Mouse',price:'1.899 ₺', desc:'Ergonomik yay tasarım, kablosuz ve 6 ay pil ömrüyle uzun çalışma konforlu.', link:'urun_detay.php?id=13', cat:'mouse' },
+    'ofis-periferal-mid':      { icon:'⌨️', title:'Kuvars K70 RGB TKL Mekanik Klavye', price:'3.499 ₺',  desc:'Sessiz tuşlar, alüminyum çerçeve ve şık tasarımla profesyonel yazma deneyimi.', link:'urun_detay.php?id=4', cat:'klavye' },
+    'ofis-periferal-high':     { icon:'⌨️', title:'Kuvars K70 RGB TKL Mekanik Klavye', price:'3.499 ₺',  desc:'Sessiz tuşlar, alüminyum çerçeve ve şık tasarımla profesyonel yazma deneyimi.', link:'urun_detay.php?id=4', cat:'klavye' },
+    'ofis-kulaklik-budget':    { icon:'🎧', title:'Kuvars Tune 230NC TWS',             price:'1.599 ₺',  desc:'ANC ile toplantılarda odaklanma ve 40 saat pil ömrüyle günlük kullanım kolaylığı.', link:'urun_detay.php?id=7', cat:'kulaklik' },
+    'ofis-kulaklik-mid':       { icon:'🎧', title:'Kuvars Cloud II Gaming Kulaklık',   price:'3.199 ₺',  desc:'Gürültü önleyici mikrofon ve konforlu tasarımla net sesli toplantılar.', link:'urun_detay.php?id=5', cat:'kulaklik' },
+    'ofis-kulaklik-high':      { icon:'🎧', title:'Kuvars Arctis 7 Wireless Kulaklık', price:'9.299 ₺',  desc:'Kablosuz özgürlük, ClearCast mikrofon ve 24 saat pil ile tam iş konforu.', link:'urun_detay.php?id=6', cat:'kulaklik' },
+    // MÜZİK
+    'muzik-laptop-budget':     { icon:'💻', title:'Kuvars D16 2026 V2',               price:'34.999 ₺', desc:'Kaliteli ses çıkışı ve uzun pil ömrüyle müzik dinleme ve üretim için ideal.', link:'urun_detay.php?id=10', cat:'laptop' },
+    'muzik-laptop-mid':        { icon:'💻', title:'Kuvars D16 2026 V2',               price:'34.999 ₺', desc:'Kaliteli ses çıkışı ve uzun pil ömrüyle müzik dinleme ve üretim için ideal.', link:'urun_detay.php?id=10', cat:'laptop' },
+    'muzik-laptop-high':       { icon:'💻', title:'Kuvars Tulpar T6 V3.4.9',           price:'54.999 ₺', desc:'Güçlü işlemci ve yüksek RAM ile yoğun ses prodüksiyon iş akışları için.', link:'urun_detay.php?id=9', cat:'laptop' },
+    'muzik-ekran-budget':      { icon:'🖥️', title:'Kuvars UltraGear 27" 144Hz',       price:'18.499 ₺', desc:'OLED\'in canlı renkleriyle müzik video ve içerik izleme keyfi.', link:'urun_detay.php?id=1', cat:'ekran' },
+    'muzik-ekran-mid':         { icon:'🖥️', title:'Kuvars UltraGear 27" 144Hz',       price:'18.499 ₺', desc:'OLED\'in canlı renkleriyle müzik video ve içerik izleme keyfi.', link:'urun_detay.php?id=1', cat:'ekran' },
+    'muzik-ekran-high':        { icon:'🖥️', title:'Kuvars S2722DGM 27" 360Hz',        price:'24.999 ₺', desc:'Üstün renk kalitesi ve keskin görüntüyle içerik üretimi ve izleme.', link:'urun_detay.php?id=2', cat:'ekran' },
+    'muzik-periferal-budget':  { icon:'⌨️', title:'Kuvars K552 Mekanik Gaming Klavye', price:'2.299 ₺',  desc:'Mekanik tuşların konforlu hissiyle uzun yazma ve prodüksiyon seansları.', link:'urun_detay.php?id=3', cat:'klavye' },
+    'muzik-periferal-mid':     { icon:'⌨️', title:'Kuvars K70 RGB TKL Mekanik Klavye', price:'3.499 ₺',  desc:'Sessiz ve hassas tuşlarla konforlu yazma, şık beyond tasarım.', link:'urun_detay.php?id=4', cat:'klavye' },
+    'muzik-periferal-high':    { icon:'🖱️', title:'Kuvars DeathAdder V3 Pro Wireless',price:'4.299 ₺',  desc:'Hafif, kablosuz ve hassas kontrol ile içerik üretiminde tam özgürlük.', link:'urun_detay.php?id=12', cat:'mouse' },
+    'muzik-kulaklik-budget':   { icon:'🎧', title:'Kuvars Tune 230NC TWS',             price:'1.599 ₺',  desc:'ANC ile konsantre müzik dinleme, güçlü bas ve 40 saat pil ömrü.', link:'urun_detay.php?id=7', cat:'kulaklik' },
+    'muzik-kulaklik-mid':      { icon:'🎧', title:'Kuvars Cloud II Gaming Kulaklık',   price:'3.199 ₺',  desc:'53mm geniş sürücüler ve zengin ses sahnesiyle müziğin içine dal.', link:'urun_detay.php?id=5', cat:'kulaklik' },
+    'muzik-kulaklik-high':     { icon:'🎧', title:'Kuvars Arctis 7 Wireless Kulaklık', price:'9.299 ₺',  desc:'Lossless ses kalitesi ve kablosuz bağlantıyla premium müzik deneyimi.', link:'urun_detay.php?id=6', cat:'kulaklik' },
+    // GENEL
+    'genel-laptop-budget':     { icon:'💻', title:'Kuvars D16 2026 V2',               price:'34.999 ₺', desc:'Her iş için yeterli güç, ince tasarım ve 18 saat pil ile günlük kullanım.', link:'urun_detay.php?id=10', cat:'laptop' },
+    'genel-laptop-mid':        { icon:'💻', title:'Kuvars ROG Strix G15 Gaming Laptop', price:'42.999 ₺', desc:'Oyun, iş ve eğlence — her senaryoda güçlü, dengeli performans.', link:'urun_detay.php?id=8', cat:'laptop' },
+    'genel-laptop-high':       { icon:'💻', title:'Kuvars Tulpar T6 V3.4.9',           price:'54.999 ₺', desc:'En yüksek performans, en büyük ekran — her şeyin en iyisi.', link:'urun_detay.php?id=9', cat:'laptop' },
+    'genel-ekran-budget':      { icon:'🖥️', title:'Kuvars UltraGear 27" 144Hz',       price:'18.499 ₺', desc:'OLED kalitesi ve 144Hz akıcılığı her kullanıma uygun evrensel ekran.', link:'urun_detay.php?id=1', cat:'ekran' },
+    'genel-ekran-mid':         { icon:'🖥️', title:'Kuvars UltraGear 27" 144Hz',       price:'18.499 ₺', desc:'OLED kalitesi ve 144Hz akıcılığı her kullanıma uygun evrensel ekran.', link:'urun_detay.php?id=1', cat:'ekran' },
+    'genel-ekran-high':        { icon:'🖥️', title:'Kuvars S2722DGM 27" 360Hz',        price:'24.999 ₺', desc:'360Hz ve sıfıra yakın tepki süresiyle her içerik akıcı ve keskin.', link:'urun_detay.php?id=2', cat:'ekran' },
+    'genel-periferal-budget':  { icon:'⌨️', title:'Kuvars K552 Mekanik Gaming Klavye', price:'2.299 ₺',  desc:'Dayanıklı mekanik tuşlar ve RGB aydınlatmayla her kullanıma uygun klavye.', link:'urun_detay.php?id=3', cat:'klavye' },
+    'genel-periferal-mid':     { icon:'🖱️', title:'Kuvars G502 X Gaming Mouse',       price:'4.899 ₺',  desc:'Hassas sensör ve ergonomik tasarımla hem oyun hem ofis kullanımı için ideal.', link:'urun_detay.php?id=11', cat:'mouse' },
+    'genel-periferal-high':    { icon:'🖱️', title:'Kuvars DeathAdder V3 Pro Wireless',price:'4.299 ₺',  desc:'Hafif, kablosuz ve uzun pil ömrüyle her ortamda özgür kullanım.', link:'urun_detay.php?id=12', cat:'mouse' },
+    'genel-kulaklik-budget':   { icon:'🎧', title:'Kuvars Tune 230NC TWS',             price:'1.599 ₺',  desc:'ANC, Bluetooth 5.2 ve 40 saat pille günlük kullanım için ideal kulak içi.', link:'urun_detay.php?id=7', cat:'kulaklik' },
+    'genel-kulaklik-mid':      { icon:'🎧', title:'Kuvars Cloud II Gaming Kulaklık',   price:'3.199 ₺',  desc:'Konforlu tasarım, geniş ses sahnesi ve mikrofonuyla çok amaçlı kullanım.', link:'urun_detay.php?id=5', cat:'kulaklik' },
+    'genel-kulaklik-high':     { icon:'🎧', title:'Kuvars Arctis 7 Wireless Kulaklık', price:'9.299 ₺',  desc:'Kablosuz premium ses ve 24 saat pil ömrüyle en iyi genel kullanım kulaklığı.', link:'urun_detay.php?id=6', cat:'kulaklik' },
   };
 
   let step = 0;
@@ -287,15 +304,16 @@ function initFinderQuiz() {
 
   function showResult() {
     const key = answers.join('-');
-    const r = results[key] || { icon: '🎯', title: 'Özel Öneri', desc: 'Size özel en iyi ürünü uzmanlarımızla birlikte bulalım!', cat: 'all' };
+    const r = results[key] || { icon: '🎯', title: 'Kuvars Koleksiyonu', price: '', desc: 'Tüm ürünlerimizi inceleyerek size en uygun olanı bulun!', link: 'urunler.html', cat: 'all' };
     app.innerHTML = `
       <div class="finder-result-card">
         <div class="finder-result-badge">Sonuç ✨</div>
         <div class="finder-result-icon">${r.icon}</div>
         <div class="finder-result-title">${r.title}</div>
+        ${r.price ? `<div style="font-size:1.3rem;font-weight:800;color:var(--red2);margin:0.4rem 0 0.6rem;">${r.price}</div>` : ''}
         <div class="finder-result-desc">${r.desc}</div>
         <div class="finder-result-actions">
-          <a href="urunler.html${r.cat !== 'all' ? '?cat=' + r.cat : ''}" class="btn-primary">Ürünleri Gör →</a>
+          <a href="${r.link || (r.cat !== 'all' ? r.cat + '.html' : 'urunler.html')}" class="btn-primary">Ürünü İncele →</a>
           <button class="btn-outline" id="finder-retry">Tekrar Dene</button>
         </div>
       </div>`;
@@ -314,48 +332,52 @@ function initQuiz() {
 
   const questions = [
     {
-      q: 'Teknolojiyi genellikle nerede kullanırsın?',
+      q: 'Bilgisayarı en çok ne için kullanıyorsun?',
       opts: [
-        { text: '🏃 Spor yaparken veya dışarıda',          s: { bileklik:3, kulaklik:1, hoparlor:0, aksesuar:0 } },
-        { text: '🎵 Müzik dinlerken veya vakit geçirirken', s: { bileklik:0, kulaklik:3, hoparlor:1, aksesuar:0 } },
-        { text: '🏠 Evde arkadaşlarla eğlenirken',          s: { bileklik:0, kulaklik:0, hoparlor:3, aksesuar:1 } },
+        { text: '🎮 FPS / Rekabetçi oyunlar (CS, Valorant vb.)', s: { mouse:3, klavye:2, kulaklik:1, laptop:0 } },
+        { text: '🌍 Açık dünya / RPG oyunları (Witcher, RDR2 vb.)', s: { mouse:1, klavye:1, kulaklik:3, laptop:1 } },
+        { text: '💼 Ofis, okul veya içerik üretimi',               s: { mouse:1, klavye:3, kulaklik:1, laptop:2 } },
+        { text: '💻 Her yerde taşınabilir kullanım',               s: { mouse:0, klavye:0, kulaklik:2, laptop:3 } },
       ]
     },
     {
-      q: 'Seni en iyi tanımlayan özellik hangisi?',
+      q: 'Kurulumunla ilgili hangisi seni en iyi tanımlıyor?',
       opts: [
-        { text: '💪 Aktif ve sportif biri',   s: { bileklik:3, kulaklik:1, hoparlor:0, aksesuar:0 } },
-        { text: '🎧 Müzik tutkunuyum',         s: { bileklik:0, kulaklik:3, hoparlor:1, aksesuar:0 } },
-        { text: '📱 Her zaman bağlantıda',     s: { bileklik:1, kulaklik:0, hoparlor:0, aksesuar:3 } },
+        { text: '🖥️ Sabit masaüstü gaming kurulumum var',    s: { mouse:2, klavye:2, kulaklik:1, laptop:0 } },
+        { text: '💻 Laptop ile oyun oynuyorum / çalışıyorum', s: { mouse:1, klavye:1, kulaklik:1, laptop:3 } },
+        { text: '🎧 Ses kalitesi benim için her şeyden önemli', s: { mouse:0, klavye:0, kulaklik:3, laptop:1 } },
+        { text: '⌨️ Klavye ve mouse\'uma çok önem veriyorum',  s: { mouse:2, klavye:3, kulaklik:0, laptop:0 } },
       ]
     },
     {
-      q: 'Bir üründe en önemli özellik senin için nedir?',
+      q: 'Bir üründe seni en çok ne etkiler?',
       opts: [
-        { text: '🔋 Uzun pil ömrü',     s: { bileklik:2, kulaklik:2, hoparlor:1, aksesuar:0 } },
-        { text: '🔊 Harika ses kalitesi', s: { bileklik:0, kulaklik:2, hoparlor:3, aksesuar:0 } },
-        { text: '🎨 Şık tasarım',        s: { bileklik:1, kulaklik:1, hoparlor:0, aksesuar:3 } },
+        { text: '⚡ Performans ve hız — her milisaniye önemli', s: { mouse:3, klavye:2, kulaklik:1, laptop:2 } },
+        { text: '🔋 Kablosuz kullanım ve uzun pil ömrü',        s: { mouse:2, klavye:1, kulaklik:3, laptop:2 } },
+        { text: '🎨 Tasarım ve RGB — setup estetiği önemli',    s: { mouse:1, klavye:3, kulaklik:1, laptop:0 } },
+        { text: '💰 En iyi fiyat/performans oranı',             s: { mouse:2, klavye:2, kulaklik:2, laptop:1 } },
       ]
     },
     {
-      q: 'Bu haftasonu planın ne?',
+      q: 'Bütçe aralığın hangisine daha yakın?',
       opts: [
-        { text: '🏞️ Outdoor aktivite veya spor', s: { bileklik:3, kulaklik:1, hoparlor:0, aksesuar:0 } },
-        { text: '🎉 Arkadaşlarla parti / buluşma', s: { bileklik:0, kulaklik:1, hoparlor:3, aksesuar:1 } },
-        { text: '🛋️ Evde rahat bir gün',           s: { bileklik:0, kulaklik:3, hoparlor:1, aksesuar:0 } },
+        { text: '💚 0 – 3.000 ₺',    s: { mouse:2, klavye:3, kulaklik:2, laptop:0 } },
+        { text: '💛 3.000 – 10.000 ₺', s: { mouse:3, klavye:2, kulaklik:3, laptop:0 } },
+        { text: '🔴 10.000 – 45.000 ₺', s: { mouse:1, klavye:1, kulaklik:1, laptop:2 } },
+        { text: '💎 45.000 ₺ ve üzeri', s: { mouse:0, klavye:0, kulaklik:0, laptop:3 } },
       ]
     }
   ];
 
   const products = {
-    bileklik: { name:'Akıllı Bileklik Pro', price:'₺1.299', desc:'Aktif yaşam tarzına özel nabız takibi, adım sayar ve uyku analizi ile her an seni destekler.', img:'https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=400&q=80' },
-    kulaklik: { name:'Kablosuz Kulaklık X1', price:'₺2.499', desc:'Aktif gürültü önleme ve 30 saat pil ömrüyle müziğini farklı boyuta taşı.', img:'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&q=80' },
-    hoparlor: { name:'Mini Hoparlör Boom', price:'₺999', desc:'Su geçirmez 360° ses teknolojisiyle her ortamda yanında olan hoparlör.', img:'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&q=80' },
-    aksesuar: { name:'Mobil Aksesuar Set', price:'₺599', desc:'Hızlı şarj standı, örgülü kablo ve şık kılıflarla tarzını tamamla.', img:'https://images.unsplash.com/photo-1556656793-08538906a9f8?w=400&q=80' }
+    mouse:    { name:'Kuvars G502 X Gaming Mouse',        price:'4.899 ₺', desc:'25.600 DPI HERO sensör, 13 programlanabilir tuş ve RGB aydınlatmayla FPS\'te tam kontrol ve üstün hassasiyet.', img:'img/final photos/mouse1/mouse1.png', link:'urun_detay.php?id=11' },
+    klavye:   { name:'Kuvars K552 Mekanik Gaming Klavye', price:'2.299 ₺', desc:'Mekanik Blue switch, RGB arka aydınlatma ve TKL kompakt tasarımla her gaming kurulumuna mükemmel eşlik.', img:'img/final photos/klavye1/klavye 6 .png', link:'urun_detay.php?id=3' },
+    kulaklik: { name:'Kuvars Arctis 7 Wireless Kulaklık', price:'9.299 ₺', desc:'Kablosuz 2.4GHz bağlantı, 24 saat pil ömrü ve lossless ses kalitesiyle gaming ve müzikte premium deneyim.', img:'img/final photos/kulaklık2/kulaklık 2.1 .png', link:'urun_detay.php?id=6' },
+    laptop:   { name:'Kuvars Tulpar T6 V3.4.9',           price:'54.999 ₺', desc:'RTX 5060, 32GB DDR5 RAM, 1TB NVMe SSD ve 17.3" 144Hz ekranıyla her yerde maksimum güç ve performans.', img:'img/final photos/laptop2/laptop 2.1 .png', link:'urun_detay.php?id=9' }
   };
 
   let current = 0, selected = null;
-  const scores = { bileklik:0, kulaklik:0, hoparlor:0, aksesuar:0 };
+  const scores = { mouse:0, klavye:0, kulaklik:0, laptop:0 };
 
   function render() {
     const { q, opts } = questions[current];
@@ -400,13 +422,13 @@ function initQuiz() {
       <div class="quiz-progress-bar" style="margin-bottom:2rem"><div class="quiz-progress-fill" style="width:100%"></div></div>
       <div class="result-card">
         <div class="result-badge">Sana Özel Öneri ✨</div>
-        <p style="color:var(--muted);font-size:.88rem;margin-bottom:.25rem">Sana en uygun ürün:</p>
+        <p style="color:var(--muted);font-size:.88rem;margin-bottom:.25rem">Yanıtlarına göre sana en uygun ürün:</p>
         <img src="${p.img}" alt="${p.name}" class="result-product-img"/>
         <div class="result-product-name">${p.name}</div>
         <div style="font-size:1.4rem;font-weight:700;color:var(--red);margin-bottom:1rem">${p.price}</div>
         <div class="result-product-desc">${p.desc}</div>
         <div class="result-actions">
-          <a href="urunler.html" class="btn-primary">Ürünü İncele →</a>
+          <a href="${p.link}" class="btn-primary">Ürünü İncele →</a>
           <button class="btn-outline" id="share-btn">Paylaş 📤</button>
           <button class="btn-outline" id="retry-btn">Tekrar Dene</button>
         </div>
