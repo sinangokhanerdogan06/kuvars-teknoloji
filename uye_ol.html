@@ -5,10 +5,33 @@
   <title>Üye Ol – Kuvars Teknoloji</title>
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-image: url('img/gifts-bg.png');
+      background-size: 420px;
+      background-repeat: repeat;
+    }
+    .register-card {
+      background: rgba(13,13,13,0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(220,38,38,0.25);
+      border-radius: 18px;
+      padding: 2.5rem;
+      max-width: 420px;
+      width: 100%;
+    }
+    [data-theme="light"] body {
+      background-image: url('img/gifts-bg.png');
+    }
+    [data-theme="light"] .register-card {
+      background: rgba(255,255,255,0.88);
+      border-color: rgba(220,38,38,0.2);
+    }
+  </style>
 </head>
 <body>
   <div class="section" style="display:flex; justify-content:center; align-items:center; min-height:100vh;">
-    <div class="card" style="max-width:400px; width:100%;">
+    <div class="register-card">
       <h2 class="section-title" style="margin-bottom:1.5rem;">Kuvars'a <span>Katıl</span></h2>
       <form id="registerForm">
         <div style="margin-bottom:1rem;">
