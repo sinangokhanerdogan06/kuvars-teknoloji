@@ -553,15 +553,33 @@ async function initNotifications() {
   try {
     const res = await fetch('indirimleri_getir.php');
     const result = await res.json();
-    if (result.status !== 'success' || !result.data.length) return;
-    const indirimler = result.data;
+    if (result.status !== 'success') return;
+    const indirimler = result.data || [];
+
+    // Kullanıcıya özel indirim varsa en üste ekle
+    const kisiselYuzde = localStorage.getItem('indirim_yuzde');
+    const kisiselMesaj = localStorage.getItem('indirim_mesaj');
+    const userName = localStorage.getItem('user_name');
+
+    let kisiselHTML = '';
+    if (userName && kisiselYuzde && parseInt(kisiselYuzde) > 0) {
+      kisiselHTML = `
+        <div class="notif-item" style="background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.3);">
+          <span class="notif-pct" style="background:linear-gradient(135deg,#16a34a,#22c55e);">%${kisiselYuzde}</span>
+          <span class="notif-msg"><strong>Sana Özel!</strong><br>${kisiselMesaj || 'Kişisel indiriminiz sepete otomatik uygulandı.'}</span>
+        </div>`;
+    }
+
+    const toplamBildirim = indirimler.length + (kisiselHTML ? 1 : 0);
+    if (toplamBildirim === 0) return;
 
     const wrap = document.createElement('div');
     wrap.className = 'notif-wrap';
     wrap.innerHTML = `
-      <button class="notif-btn" id="notifBtn">🔔<span class="notif-badge">${indirimler.length}</span></button>
+      <button class="notif-btn" id="notifBtn">🔔<span class="notif-badge">${toplamBildirim}</span></button>
       <div class="notif-dropdown" id="notifDropdown">
-        <div class="notif-header">🎁 Güncel İndirimler</div>
+        <div class="notif-header">🎁 İndirimler & Fırsatlar</div>
+        ${kisiselHTML}
         ${indirimler.map(d => `
           <div class="notif-item">
             <span class="notif-pct">%${d.yuzde}</span>
