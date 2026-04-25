@@ -582,6 +582,105 @@ function initNotifications() {
   });
 }
 
+// ── CANLI DESTEK CHAT ────────────────────────────────────────────
+function initLiveChat() {
+  const widget = document.createElement('div');
+  widget.className = 'chat-widget';
+  widget.innerHTML = `
+    <div class="chat-window hidden" id="chatWindow">
+      <div class="chat-header">
+        <div class="chat-header-avatar">🤖</div>
+        <div class="chat-header-info">
+          <div class="chat-header-name">Kuvars Destek</div>
+          <div class="chat-header-status">Çevrimiçi · Yapay Zeka Destekli</div>
+        </div>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="chat-msg bot">Merhaba! 👋 Kuvars Teknoloji'ye hoş geldiniz. Size nasıl yardımcı olabilirim?</div>
+      </div>
+      <div class="chat-quick-btns" id="chatQuickBtns">
+        <button class="chat-quick-btn">📦 Kargo durumu</button>
+        <button class="chat-quick-btn">🔄 İade nasıl?</button>
+        <button class="chat-quick-btn">💻 Laptop öner</button>
+        <button class="chat-quick-btn">🎧 Kulaklık öner</button>
+      </div>
+      <div class="chat-input-area">
+        <textarea class="chat-input" id="chatInput" placeholder="Mesajınızı yazın…" rows="1"></textarea>
+        <button class="chat-send-btn" id="chatSendBtn">➤</button>
+      </div>
+    </div>
+    <button class="chat-toggle-btn" id="chatToggle">💬</button>
+  `;
+  document.body.appendChild(widget);
+
+  const win = document.getElementById('chatWindow');
+  const msgs = document.getElementById('chatMessages');
+  const input = document.getElementById('chatInput');
+  const sendBtn = document.getElementById('chatSendBtn');
+  const quickBtns = document.getElementById('chatQuickBtns');
+  let history = [];
+  let isOpen = false;
+
+  document.getElementById('chatToggle').addEventListener('click', () => {
+    isOpen = !isOpen;
+    win.classList.toggle('hidden', !isOpen);
+    document.getElementById('chatToggle').textContent = isOpen ? '✕' : '💬';
+  });
+
+  quickBtns.querySelectorAll('.chat-quick-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      sendMessage(btn.textContent.trim());
+      quickBtns.style.display = 'none';
+    });
+  });
+
+  sendBtn.addEventListener('click', () => sendMessage(input.value.trim()));
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(input.value.trim()); }
+  });
+
+  async function sendMessage(text) {
+    if (!text) return;
+    input.value = '';
+    quickBtns.style.display = 'none';
+
+    const userMsg = document.createElement('div');
+    userMsg.className = 'chat-msg user';
+    userMsg.textContent = text;
+    msgs.appendChild(userMsg);
+
+    const typing = document.createElement('div');
+    typing.className = 'chat-typing';
+    typing.innerHTML = '<span></span><span></span><span></span>';
+    msgs.appendChild(typing);
+    msgs.scrollTop = msgs.scrollHeight;
+
+    history.push({ role: 'user', text });
+
+    try {
+      const res = await fetch('gemini_chat.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text, history: history.slice(-10) })
+      });
+      const data = await res.json();
+      typing.remove();
+      const botMsg = document.createElement('div');
+      botMsg.className = 'chat-msg bot';
+      botMsg.textContent = data.reply || 'Bir hata oluştu.';
+      msgs.appendChild(botMsg);
+      history.push({ role: 'model', text: data.reply });
+    } catch {
+      typing.remove();
+      const errMsg = document.createElement('div');
+      errMsg.className = 'chat-msg bot';
+      errMsg.textContent = 'Bağlantı hatası, lütfen tekrar deneyin.';
+      msgs.appendChild(errMsg);
+    }
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+}
+
 // ── BOOT ─────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
@@ -597,4 +696,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initFinderQuiz();
   initQuiz();
   urunleriYukle();
+  initLiveChat();
 });
