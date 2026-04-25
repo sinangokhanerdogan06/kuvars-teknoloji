@@ -484,7 +484,10 @@ async function urunleriYukle() {
             <div class="flip-card-back">
               <div class="back-title">${urun.isim}</div>
               <ul class="back-features">${ozellikListesi}</ul>
-              <button class="btn-sm" onclick="gercekSepeteEkle('${urun.id}','${isimSafe}','${urun.fiyat}','${urun.resim_url}')">Sepete Ekle 🛒</button>
+              <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+                <button class="btn-sm" onclick="gercekSepeteEkle('${urun.id}','${isimSafe}','${urun.fiyat}','${urun.resim_url}')">Sepete Ekle 🛒</button>
+                <a href="urun_detay.php?id=${urun.id}" class="btn-sm" style="text-decoration:none;background:var(--bg1);border:1px solid var(--border2);color:var(--text);">İncele →</a>
+              </div>
             </div>
           </div>
         </div>`;
