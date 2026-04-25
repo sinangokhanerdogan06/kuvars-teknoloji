@@ -570,21 +570,15 @@ async function initNotifications() {
         </div>`;
     }
 
-    const toplamBildirim = indirimler.length + (kisiselHTML ? 1 : 0);
-    if (toplamBildirim === 0) return;
+    if (!kisiselHTML) return;
 
     const wrap = document.createElement('div');
     wrap.className = 'notif-wrap';
     wrap.innerHTML = `
-      <button class="notif-btn" id="notifBtn">🔔<span class="notif-badge">${toplamBildirim}</span></button>
+      <button class="notif-btn" id="notifBtn">🔔<span class="notif-badge">1</span></button>
       <div class="notif-dropdown" id="notifDropdown">
-        <div class="notif-header">🎁 İndirimler & Fırsatlar</div>
+        <div class="notif-header">🎁 Kişisel Kuponunuz</div>
         ${kisiselHTML}
-        ${indirimler.map(d => `
-          <div class="notif-item">
-            <span class="notif-pct">%${d.yuzde}</span>
-            <span class="notif-msg">${d.mesaj}</span>
-          </div>`).join('')}
       </div>`;
 
     const cartBtn = actions.querySelector('.cart-btn');
