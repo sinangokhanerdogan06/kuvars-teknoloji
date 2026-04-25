@@ -1,8 +1,9 @@
 <?php
 header('Content-Type: application/json');
 
-$API_KEY = 'AIzaSyDLCpHYa2evILUzR_uEzditGUcL-gyhWgU';
-$API_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key=$API_KEY";
+require_once 'config.php';
+$API_KEY = GROQ_API_KEY;
+$API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
 $input = json_decode(file_get_contents('php://input'), true);
 $message = $input['message'] ?? '';
@@ -13,46 +14,44 @@ if (empty($message)) {
     exit;
 }
 
-$system_prompt = "Sen Kuvars Teknoloji'nin canlı destek asistanısın. Kuvars Teknoloji, Türkiye'nin güvenilir teknoloji e-ticaret sitesidir. Laptop, monitör (ekran), klavye, mouse, kulaklık ve mousepad kategorilerinde ürünler satmaktayız. Tüm ürünler orijinal ve garantilidir. Saat 14:00'e kadar verilen siparişler aynı gün kargoya verilir. 30 gün ücretsiz iade garantisi mevcuttur. Güvenli ödeme sistemi (3D Secure, SSL) kullanıyoruz. Üyelere özel indirim kuponları tanımlanmaktadır. Kısa, samimi, yardımcı ve Türkçe cevaplar ver. Fazla uzun cevap verme, sohbet havasında ol.";
+$system_prompt = "Sen Kuvars Teknoloji'nin canlı destek asistanısın. Kuvars Teknoloji, Türkiye'nin güvenilir teknoloji e-ticaret sitesidir. Laptop, monitör (ekran), klavye, mouse, kulaklık ve mousepad kategorilerinde ürünler satmaktayız. Tüm ürünler orijinaldir ve garantilidir. Saat 14:00'e kadar verilen siparişler aynı gün kargoya verilir. 30 gün ücretsiz iade garantisi var. Güvenli ödeme (3D Secure, SSL) kullanıyoruz. Üyelere özel indirim kuponları verilmektedir. Kısa, samimi ve Türkçe cevaplar ver. Çok uzun yazma, sohbet gibi ol.";
 
-$contents = [
-    ['role' => 'user', 'parts' => [['text' => $system_prompt]]],
-    ['role' => 'model', 'parts' => [['text' => 'Anlaşıldı.']]]
-];
+$messages = [['role' => 'system', 'content' => $system_prompt]];
+
 foreach ($history as $item) {
-    $contents[] = ['role' => $item['role'], 'parts' => [['text' => $item['text']]]];
+    $messages[] = ['role' => $item['role'] === 'model' ? 'assistant' : 'user', 'content' => $item['text']];
 }
-$contents[] = ['role' => 'user', 'parts' => [['text' => $message]]];
+$messages[] = ['role' => 'user', 'content' => $message];
 
 $payload = json_encode([
-    'contents' => $contents,
-    'generationConfig' => ['temperature' => 0.7, 'maxOutputTokens' => 400]
+    'model'       => 'llama3-8b-8192',
+    'messages'    => $messages,
+    'temperature' => 0.7,
+    'max_tokens'  => 400
 ]);
 
 $response = false;
 
-// Önce curl dene
 if (function_exists('curl_init')) {
     $ch = curl_init($API_URL);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Content-Type: application/json',
+        'Authorization: Bearer ' . $API_KEY
+    ]);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
     curl_setopt($ch, CURLOPT_TIMEOUT, 15);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
     $response = curl_exec($ch);
-    $curlError = curl_error($ch);
     curl_close($ch);
-    if (!$response) $response = false;
 }
 
-// curl başarısızsa file_get_contents dene
 if ($response === false && ini_get('allow_url_fopen')) {
     $context = stream_context_create([
         'http' => [
             'method'  => 'POST',
-            'header'  => "Content-Type: application/json\r\n",
+            'header'  => "Content-Type: application/json\r\nAuthorization: Bearer $API_KEY\r\n",
             'content' => $payload,
             'timeout' => 15,
             'ignore_errors' => true
@@ -63,17 +62,17 @@ if ($response === false && ini_get('allow_url_fopen')) {
 }
 
 if ($response === false) {
-    echo json_encode(['reply' => 'API bağlantısı kurulamadı. XAMPP\'ta curl veya allow_url_fopen etkin değil.']);
+    echo json_encode(['reply' => 'Bağlantı kurulamadı. Lütfen tekrar deneyin.']);
     exit;
 }
 
 $data = json_decode($response, true);
 
 if (isset($data['error'])) {
-    echo json_encode(['reply' => 'API hatası: ' . ($data['error']['message'] ?? 'Bilinmeyen hata')]);
+    echo json_encode(['reply' => 'Hata: ' . ($data['error']['message'] ?? 'Bilinmeyen hata')]);
     exit;
 }
 
-$reply = $data['candidates'][0]['content']['parts'][0]['text'] ?? 'Yanıt alınamadı.';
+$reply = $data['choices'][0]['message']['content'] ?? 'Yanıt alınamadı.';
 echo json_encode(['reply' => $reply]);
 ?>
