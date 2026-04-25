@@ -546,11 +546,49 @@ function gercekSepeteEkle(id, isim, fiyat, resim) {
   alert(isim + ' sepete eklendi!');
 }
 
+// ── BİLDİRİM ZİLİ ────────────────────────────────────────────────
+async function initNotifications() {
+  const actions = document.querySelector('.topbar-actions');
+  if (!actions) return;
+  try {
+    const res = await fetch('indirimleri_getir.php');
+    const result = await res.json();
+    if (result.status !== 'success' || !result.data.length) return;
+    const indirimler = result.data;
+
+    const wrap = document.createElement('div');
+    wrap.className = 'notif-wrap';
+    wrap.innerHTML = `
+      <button class="notif-btn" id="notifBtn">🔔<span class="notif-badge">${indirimler.length}</span></button>
+      <div class="notif-dropdown" id="notifDropdown">
+        <div class="notif-header">🎁 Güncel İndirimler</div>
+        ${indirimler.map(d => `
+          <div class="notif-item">
+            <span class="notif-pct">%${d.yuzde}</span>
+            <span class="notif-msg">${d.mesaj}</span>
+          </div>`).join('')}
+      </div>`;
+
+    const cartBtn = actions.querySelector('.cart-btn');
+    actions.insertBefore(wrap, cartBtn);
+
+    document.getElementById('notifBtn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      document.getElementById('notifDropdown').classList.toggle('open');
+    });
+    document.addEventListener('click', () => {
+      const dd = document.getElementById('notifDropdown');
+      if (dd) dd.classList.remove('open');
+    });
+  } catch(e) {}
+}
+
 // ── BOOT ─────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initUserStatus();
   initCart();
+  initNotifications();
   initSearch();
   initMobileMenu();
   initCategorySlider();
