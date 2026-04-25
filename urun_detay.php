@@ -58,23 +58,13 @@ $ana_resim = $resimler[0] ?? $urun['resim_url'];
 <header class="topbar">
   <div class="topbar-main">
     <a href="index.html" class="site-logo">
-      <svg class="logo-crystal" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="24,3 44,14 44,34 24,45 4,34 4,14" fill="none" stroke="url(#lg1)" stroke-width="2.2"/>
-        <polygon points="24,3 34,10 34,22 24,28 14,22 14,10" fill="url(#lg2)" opacity="0.25"/>
-        <polygon points="24,45 34,38 34,26 24,20 14,26 14,38" fill="url(#lg2)" opacity="0.12"/>
-        <line x1="24" y1="3" x2="24" y2="45" stroke="url(#lg1)" stroke-width="1.2" opacity="0.5"/>
-        <line x1="4" y1="14" x2="44" y2="34" stroke="url(#lg1)" stroke-width="1.2" opacity="0.4"/>
-        <line x1="44" y1="14" x2="4" y2="34" stroke="url(#lg1)" stroke-width="1.2" opacity="0.4"/>
-        <defs>
-          <linearGradient id="lg1" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#ef5350"/>
-            <stop offset="100%" stop-color="#b71c1c"/>
-          </linearGradient>
-          <linearGradient id="lg2" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#ef5350"/>
-            <stop offset="100%" stop-color="#b71c1c"/>
-          </linearGradient>
-        </defs>
+      <svg class="logo-crystal" viewBox="0 0 34 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17 2L31 10V10L25 14L17 11L9 14L3 10V10L17 2Z" fill="#DC2626"/>
+        <path d="M3 10L9 14V30L17 40L9 30V14L3 10Z" fill="#7F1D1D"/>
+        <path d="M31 10L25 14V30L17 40L25 30V14L31 10Z" fill="#991B1B"/>
+        <path d="M9 14L17 11L25 14L17 18L9 14Z" fill="#EF4444" opacity="0.8"/>
+        <path d="M9 14V30L17 18V40L17 40L9 30V14Z" fill="#DC2626" opacity="0.4"/>
+        <path d="M25 14V30L17 18V40L17 40L25 30V14Z" fill="#EF4444" opacity="0.25"/>
       </svg>
       <div class="logo-text-wrap"><span class="logo-brand">Kuvars</span><span class="logo-sub">Teknoloji</span></div>
     </a>
