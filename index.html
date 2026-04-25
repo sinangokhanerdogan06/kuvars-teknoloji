@@ -8,6 +8,111 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .hero-section {
+      position: relative;
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(220,38,38,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(220,38,38,0.12);
+      border: 1px solid rgba(220,38,38,0.3);
+      color: var(--red2);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+      color: var(--fg);
+      letter-spacing: -0.02em;
+    }
+    .hero-title span {
+      background: linear-gradient(135deg, #EF4444, #DC2626);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+    }
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    .hero-link {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid var(--border2);
+      padding-bottom: 2px;
+      transition: color 0.2s;
+    }
+    .hero-link:hover { color: var(--red2); }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+    .hero-stat strong {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--red2);
+      line-height: 1;
+    }
+    .hero-stat span {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .hero-divider {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #DC2626, #EF4444);
+      border-radius: 99px;
+      margin: 0 auto 3rem;
+    }
+    @media (max-width: 600px) {
+      .hero-section { padding: 3.5rem 1.2rem 2.5rem; }
+      .hero-stats { gap: 1.8rem; }
+    }
+  </style>
 </head>
 <body>
 
@@ -72,6 +177,22 @@
     <a href="uye_ol.html" style="color:var(--red2)">✨ Üye Ol</a>
   </div>
 </header>
+
+<section class="hero-section">
+  <div class="hero-badge">⚡ Türkiye'nin Teknoloji Adresi</div>
+  <h1 class="hero-title">Teknolojinin <span>Özünde</span>,<br>İhtiyacınızın Kalbinde.</h1>
+  <p class="hero-sub">Güvenilir, hızlı ve kaliteli alışveriş için doğru adres.</p>
+  <div class="hero-actions">
+    <a href="urunler.html" class="btn-primary">Ürünleri Keşfet →</a>
+    <a href="quiz.html" class="hero-link">Bana Uygun Ürünü Bul</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><strong>10.000+</strong><span>Mutlu Müşteri</span></div>
+    <div class="hero-stat"><strong>500+</strong><span>Ürün Çeşidi</span></div>
+    <div class="hero-stat"><strong>4.8★</strong><span>Ortalama Puan</span></div>
+  </div>
+  <div class="hero-divider" style="margin-top:3rem;"></div>
+</section>
 
 <div class="campaign-banner">
   <div class="campaign-inner">
