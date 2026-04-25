@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 
 $API_KEY = 'AIzaSyDLCpHYa2evILUzR_uEzditGUcL-gyhWgU';
-$API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=$API_KEY";
+$API_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key=$API_KEY";
 
 $input = json_decode(file_get_contents('php://input'), true);
 $message = $input['message'] ?? '';
