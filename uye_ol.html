@@ -46,8 +46,9 @@
 
         if (result.status === 'success') {
           mesajEl.style.color = '#22C55E';
-          mesajEl.textContent = "Başarıyla kayıt oldunuz! Giriş yapabilirsiniz.";
+          mesajEl.textContent = "Başarıyla kayıt oldunuz! Giriş sayfasına yönlendiriliyorsunuz...";
           document.getElementById('registerForm').reset();
+          setTimeout(() => { window.location.href = 'giris.html'; }, 1500);
         } else {
           mesajEl.style.color = '#EF4444';
           mesajEl.textContent = result.message;
