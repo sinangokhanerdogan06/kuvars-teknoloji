@@ -11,12 +11,8 @@
 </head>
 <body>
 
-<!-- ════════════════════════════════════════
-     TOPBAR
-════════════════════════════════════════ -->
 <header class="topbar">
   <div class="topbar-main">
-    <!-- Logo -->
     <a href="index.html" class="site-logo">
       <svg class="logo-crystal" viewBox="0 0 34 42" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M17 2L31 10V10L25 14L17 11L9 14L3 10V10L17 2Z" fill="#DC2626"/>
@@ -32,58 +28,63 @@
       </div>
     </a>
 
-    <!-- Search -->
     <div class="search-bar">
       <input type="search" placeholder="Ürün, kategori veya marka ara…" id="searchInput" />
       <button class="search-btn" title="Ara">🔍</button>
     </div>
 
-    <!-- Actions -->
-    <div class="topbar-actions">
-      <button class="theme-toggle" id="themeToggle" title="Tema Değiştir">☀️</button>
-      <a href="sepet.html" class="cart-btn" title="Sepet">
+    <div class="topbar-actions" style="margin-left: auto;">
+      <div style="display:flex; gap:0.5rem; align-items:center;">
+          <button class="theme-toggle" id="themeToggle" title="Tema Değiştir">☀️</button>
+          
+          <div style="position:relative;">
+              <button class="theme-toggle" id="notifBtn" title="Bildirimler" style="position:relative;">
+                🔔<span class="cart-badge" id="notifBadge" style="display:none; background:#3B82F6; right:-2px; top:-2px;">1</span>
+              </button>
+              
+              <div id="notifBox" style="display:none; position:absolute; top:45px; right:0; background:var(--bg2); border:1px solid var(--border2); border-radius:12px; width:260px; padding:1rem; box-shadow:0 10px 30px var(--shadow); z-index:1000;">
+                  <h4 style="font-size:0.85rem; margin-bottom:0.5rem; color:var(--muted); border-bottom:1px solid var(--border2); padding-bottom:0.5rem;">Bildirimler</h4>
+                  <p id="notifMessage" style="font-size:0.85rem; line-height:1.4; color:var(--text); margin-top:0.5rem;">Henüz bir bildiriminiz yok.</p>
+              </div>
+          </div>
+      </div>
+
+      <a href="sepet.html" class="cart-btn" title="Sepet" style="text-decoration: none;">
         🛒
         <span class="cart-badge" id="cartBadge">0</span>
       </a>
+      
       <div id="authArea" style="display:flex;gap:0.75rem;align-items:center;">
-        <a href="giris.html" class="btn-login">Giriş Yap</a>
-        <a href="uye_ol.html" class="btn-register">Üye Ol</a>
+        <a href="giris.html" class="btn-login" id="btnLogin">Giriş Yap</a>
+        <a href="uye_ol.html" class="btn-register" id="btnRegister">Üye Ol</a>
       </div>
     </div>
-
-    <!-- Hamburger (mobile) -->
     <button class="hamburger" aria-label="Menü">
       <span></span><span></span><span></span>
     </button>
   </div>
 
-  <!-- Sub navigation -->
   <nav class="subnav">
     <ul>
       <li><a href="index.html" class="active">Ana Sayfa</a></li>
       <li><a href="kampanya.html">Kampanyalar</a></li>
       <li><a href="urunler.html">Ürünler</a></li>
       <li><a href="quiz.html">Ürün Bul</a></li>
-    </ul>
+      <li><a href="#hakkimizda">Hakkımızda</a></li> </ul>
   </nav>
 
-  <!-- Mobile menu -->
   <div class="mobile-menu">
     <a href="index.html">🏠 Ana Sayfa</a>
     <a href="kampanya.html">🎉 Kampanyalar</a>
     <a href="urunler.html">🛍️ Ürünler</a>
     <a href="quiz.html">🔍 Ürün Bul</a>
-    <a href="giris.html" style="color:var(--red2)">👤 Giriş Yap</a>
+    <a href="#hakkimizda">ℹ️ Hakkımızda</a> <a href="giris.html" style="color:var(--red2)">👤 Giriş Yap</a>
     <a href="uye_ol.html" style="color:var(--red2)">✨ Üye Ol</a>
   </div>
 </header>
 
-<!-- ════════════════════════════════════════
-     CAMPAIGN BANNER (placeholder)
-════════════════════════════════════════ -->
 <div class="campaign-banner">
   <div class="campaign-inner">
-    <!-- corner accents -->
     <div class="campaign-corner tl"></div>
     <div class="campaign-corner tr"></div>
     <div class="campaign-corner bl"></div>
@@ -99,9 +100,6 @@
   </div>
 </div>
 
-<!-- ════════════════════════════════════════
-     CATEGORIES
-════════════════════════════════════════ -->
 <section class="categories-section">
   <div class="section-header">
     <h2 class="section-title">Kategoriler</h2>
@@ -111,7 +109,6 @@
   <div class="cat-slider-wrap">
     <div class="cat-slider" id="catSlider">
 
-      <!-- Ekran -->
       <div class="cat-flip-wrap">
         <div class="cat-flip-inner">
           <div class="cat-flip-front">
@@ -129,7 +126,6 @@
         </div>
       </div>
 
-      <!-- Kulaklık -->
       <div class="cat-flip-wrap">
         <div class="cat-flip-inner">
           <div class="cat-flip-front">
@@ -147,7 +143,6 @@
         </div>
       </div>
 
-      <!-- Klavye -->
       <div class="cat-flip-wrap">
         <div class="cat-flip-inner">
           <div class="cat-flip-front">
@@ -165,7 +160,6 @@
         </div>
       </div>
 
-      <!-- Mouse -->
       <div class="cat-flip-wrap">
         <div class="cat-flip-inner">
           <div class="cat-flip-front">
@@ -183,7 +177,6 @@
         </div>
       </div>
 
-      <!-- Mouse Pad -->
       <div class="cat-flip-wrap">
         <div class="cat-flip-inner">
           <div class="cat-flip-front">
@@ -201,7 +194,6 @@
         </div>
       </div>
 
-      <!-- Laptop -->
       <div class="cat-flip-wrap">
         <div class="cat-flip-inner">
           <div class="cat-flip-front">
@@ -223,9 +215,6 @@
   </div>
 </section>
 
-<!-- ════════════════════════════════════════
-     FINDER QUIZ
-════════════════════════════════════════ -->
 <section class="finder-section">
   <div class="finder-inner">
     <div class="finder-badge">🔍 Akıllı Ürün Bulucu</div>
@@ -238,9 +227,6 @@
   </div>
 </section>
 
-<!-- ════════════════════════════════════════
-     WHY KUVARS
-════════════════════════════════════════ -->
 <section class="why-section">
   <div class="section-header" style="padding:0;margin-bottom:0">
     <div>
@@ -285,9 +271,6 @@
   </div>
 </section>
 
-<!-- ════════════════════════════════════════
-     CUSTOMER REVIEWS
-════════════════════════════════════════ -->
 <section class="reviews-section">
   <div class="reviews-inner">
     <div class="section-header" style="padding:0">
@@ -397,10 +380,7 @@
   </div>
 </section>
 
-<!-- ════════════════════════════════════════
-     FOOTER
-════════════════════════════════════════ -->
-<footer class="site-footer">
+<footer class="site-footer" id="hakkimizda">
   <div class="footer-inner">
     <div class="footer-brand">
       <a href="index.html" class="site-logo" style="margin-bottom:.25rem">

@@ -33,21 +33,21 @@
       formData.append('sifre', document.getElementById('sifre').value);
 
       try {
-        const response = await fetch('giris.php', {
-          method: 'POST',
-          body: formData
-        });
+        const response = await fetch('giris.php', { method: 'POST', body: formData });
         const result = await response.json();
 
         if (result.status === 'success') {
+          // GİRİŞ BİLGİLERİNİ VE İNDİRİMİ KAYDEDİYORUZ
           localStorage.setItem('user_name', result.ad_soyad);
+          if (result.indirim_yuzde) {
+              localStorage.setItem('indirim_yuzde', result.indirim_yuzde);
+              localStorage.setItem('indirim_mesaj', result.indirim_mesaj);
+              localStorage.setItem('notif_okundu', 'false'); // Yeni bildirim uyarısı için
+          }
+
           mesajEl.style.color = '#22C55E';
           mesajEl.textContent = "Giriş başarılı! Ana sayfaya yönlendiriliyorsunuz...";
-          
-          // 2 saniye bekleyip kullanıcıyı ana sayfaya atıyoruz
-          setTimeout(() => {
-            window.location.href = 'index.html';
-          }, 2000);
+          setTimeout(() => { window.location.href = 'index.html'; }, 2000);
         } else {
           mesajEl.style.color = '#EF4444';
           mesajEl.textContent = result.message;
@@ -57,5 +57,6 @@
       }
     });
   </script>
+  
 </body>
 </html>

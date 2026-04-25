@@ -42,7 +42,22 @@
     </a>
 
     <div class="topbar-actions" style="margin-left:auto;">
-      <button class="theme-toggle" id="themeToggle" title="Tema Değiştir">☀️</button>
+      
+      <div style="display:flex; gap:0.5rem; align-items:center;">
+          <button class="theme-toggle" id="themeToggle" title="Tema Değiştir">☀️</button>
+
+          <div style="position:relative;">
+              <button class="theme-toggle" id="notifBtn" title="Bildirimler" style="position:relative;">
+                🔔<span class="cart-badge" id="notifBadge" style="display:none; background:#3B82F6; right:-2px; top:-2px;">1</span>
+              </button>
+              
+              <div id="notifBox" style="display:none; position:absolute; top:45px; right:0; background:var(--bg2); border:1px solid var(--border2); border-radius:12px; width:260px; padding:1rem; box-shadow:0 10px 30px var(--shadow); z-index:1000;">
+                  <h4 style="font-size:0.85rem; margin-bottom:0.5rem; color:var(--muted); border-bottom:1px solid var(--border2); padding-bottom:0.5rem;">Bildirimler</h4>
+                  <p id="notifMessage" style="font-size:0.85rem; line-height:1.4; color:var(--text); margin-top:0.5rem;">Henüz bir bildiriminiz yok.</p>
+              </div>
+          </div>
+      </div>
+
       <a href="sepet.html" class="cart-btn" style="text-decoration:none;">🛒<span class="cart-badge" id="cartBadge">0</span></a>
       <div id="authArea" style="display:flex;gap:0.75rem;align-items:center;">
         <a href="giris.html" class="btn-login">Giriş Yap</a>
@@ -70,7 +85,7 @@
       <div style="font-size:2.5rem;line-height:1;">💳</div>
       <div style="flex:1;">
         <div style="font-weight:800;font-size:1.2rem;letter-spacing:2px;font-style:italic;">VISA</div>
-        <div style="font-size:0.9rem;font-weight:500;opacity:0.9;margin-top:2px;">**** **** **** 4242</div>
+        <div style="font-size:0.9rem;font-weight:500;opacity:0.9;margin-top:2px;">** ** ** 4242</div>
       </div>
       <div style="text-align:right;">
         <div style="font-size:0.75rem;font-weight:600;opacity:0.8;text-transform:uppercase;">Kayıtlı Kart</div>
@@ -79,7 +94,7 @@
     </div>
 
     <p style="color:var(--muted);margin-bottom:0.5rem;">Ödenecek Toplam Tutar</p>
-    <div class="total-price"><span id="toplamTutar">0</span> ₺</div>
+    <div class="total-price" id="toplamTutar">0 ₺</div>
 
     <div style="display:flex;justify-content:flex-end;gap:15px;">
       <button class="remove-btn" onclick="sepetiSifirla()" style="font-size:0.9rem;">Sepeti Temizle</button>
@@ -132,7 +147,20 @@
         </div>`;
     }).join('');
 
-    toplamEl.textContent = toplam.toLocaleString('tr-TR');
+    // İNDİRİM HESAPLAMA MANTIĞI EKLENDİ
+    const indirimYuzde = parseInt(localStorage.getItem('indirim_yuzde')) || 0;
+    const indirimMiktari = (toplam * indirimYuzde) / 100;
+    const netOdenecek = toplam - indirimMiktari;
+
+    if (indirimYuzde > 0) {
+        toplamEl.innerHTML = `
+            <div style="font-size: 1rem; color: var(--muted); text-decoration: line-through;">${toplam.toLocaleString('tr-TR')} ₺</div>
+            <div style="font-size: 1.2rem; color: #22C55E;">-%${indirimYuzde} İndirim (-${indirimMiktari.toLocaleString('tr-TR', {maximumFractionDigits:0})} ₺)</div>
+            <div>${netOdenecek.toLocaleString('tr-TR', {maximumFractionDigits:0})} ₺</div>
+        `;
+    } else {
+        toplamEl.textContent = toplam.toLocaleString('tr-TR') + ' ₺';
+    }
   }
 
   function miktarGuncelle(id, delta) {
@@ -163,8 +191,16 @@
     }
   }
 
+  // ÖDEME YAP MESAJI İNDİRİME GÖRE GÜNCELLENDİ
   function odemeYap() {
-    alert("Siparişiniz alındı! Kuvars Teknoloji'yi tercih ettiğiniz için teşekkürler.");
+    const indirimYuzde = parseInt(localStorage.getItem('indirim_yuzde')) || 0;
+    let mesaj = "💳 ÖDEME BAŞARILI!\n\n";
+    if (indirimYuzde > 0) {
+        mesaj += Tebrikler, %${indirimYuzde} indiriminiz başarıyla sepete uygulandı!\n\n;
+    }
+    mesaj += "Siparişiniz hazırlanıyor, Kuvars Teknoloji'yi tercih ettiğiniz için teşekkürler! 🚀";
+    
+    alert(mesaj);
     localStorage.removeItem('sepet');
     window.location.href = 'index.html';
   }
