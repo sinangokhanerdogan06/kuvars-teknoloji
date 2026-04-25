@@ -173,7 +173,10 @@ function initProductFilter() {
       btns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       const f = btn.dataset.filter;
-      cards.forEach(card => card.classList.toggle('hidden', !(f === 'all' || card.dataset.category === f)));
+      cards.forEach(card => {
+        const match = f === 'all' || card.dataset.altCategory === f || card.dataset.category === f;
+        card.classList.toggle('hidden', !match);
+      });
     });
   });
 }
@@ -449,7 +452,7 @@ async function urunleriYukle() {
 
       // Alt kategori filtresi (?cat=mekanik gibi)
       if (catParam) {
-        urunler = urunler.filter(u => u.kategori.toLowerCase() === catParam.toLowerCase());
+        urunler = urunler.filter(u => u.alt_kategori && u.alt_kategori.toLowerCase() === catParam.toLowerCase());
       }
 
       // Arama filtresi
@@ -471,7 +474,7 @@ async function urunleriYukle() {
         try { ozellikListesi = JSON.parse(urun.ozellikler).map(oz => `<li>${oz}</li>`).join(''); } catch(e) {}
         const isimSafe = urun.isim.replace(/'/g, "\\'");
         const kart = `
-        <div class="flip-card fade-in visible" data-category="${urun.kategori}">
+        <div class="flip-card fade-in visible" data-category="${urun.kategori}" data-alt-category="${urun.alt_kategori || ''}">
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <img src="${urun.resim_url}" alt="${urun.isim}" class="product-img"/>
@@ -480,6 +483,7 @@ async function urunleriYukle() {
                 <div class="product-name">${urun.isim}</div>
                 <div class="product-price">₺${urun.fiyat}</div>
               </div>
+              <a href="urun_detay.php?id=${urun.id}" class="mobile-incele">İncele →</a>
             </div>
             <div class="flip-card-back">
               <div class="back-title">${urun.isim}</div>
