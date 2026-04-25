@@ -133,6 +133,17 @@
     /* ── HERO ANIMASYONLARI ── */
     .hero-anim { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .hero-anim.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── BACKGROUND PATHS ── */
+    #bgPathsContainer { position:absolute; inset:0; pointer-events:none; overflow:hidden; z-index:0; }
+    #bgPathsContainer svg { position:absolute; width:100%; height:100%; }
+    .hero-section > *:not(#bgPathsContainer) { position:relative; z-index:1; }
+    @keyframes bgPathFlow {
+      0%   { stroke-dashoffset: 2200; opacity: 0; }
+      15%  { opacity: 1; }
+      85%  { opacity: 1; }
+      100% { stroke-dashoffset: -2200; opacity: 0; }
+    }
   </style>
 </head>
 <body>
@@ -144,6 +155,8 @@
       <path d="M3 10L9 14V30L17 40L9 30V14L3 10Z" fill="#7F1D1D"/>
       <path d="M31 10L25 14V30L17 40L25 30V14L31 10Z" fill="#991B1B"/>
       <path d="M9 14L17 11L25 14L17 18L9 14Z" fill="#EF4444" opacity="0.8"/>
+      <path d="M9 14V30L17 18V40L17 40L9 30V14Z" fill="#DC2626" opacity="0.4"/>
+      <path d="M25 14V30L17 18V40L17 40L25 30V14Z" fill="#EF4444" opacity="0.25"/>
     </svg>
     <div class="splash-logo-text">Kuvars <span>Teknoloji</span></div>
   </div>
@@ -627,7 +640,38 @@
 
 <script src="js/main.js"></script>
 <script>
-  // Splash: 1.2s sonra kapat, hero elementlerini sırayla göster
+  // ── Background Paths (vanilya JS - Framer Motion'dan dönüştürüldü) ──
+  (function() {
+    const ns = 'http://www.w3.org/2000/svg';
+    const container = document.createElement('div');
+    container.id = 'bgPathsContainer';
+
+    [1, -1].forEach(position => {
+      const svg = document.createElementNS(ns, 'svg');
+      svg.setAttribute('viewBox', '0 0 696 316');
+      svg.setAttribute('fill', 'none');
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+
+      for (let i = 0; i < 36; i++) {
+        const d = `M-${380 - i*5*position} -${189 + i*6}C-${380 - i*5*position} -${189 + i*6} -${312 - i*5*position} ${216 - i*6} ${152 - i*5*position} ${343 - i*6}C${616 - i*5*position} ${470 - i*6} ${684 - i*5*position} ${875 - i*6} ${684 - i*5*position} ${875 - i*6}`;
+        const path = document.createElementNS(ns, 'path');
+        path.setAttribute('d', d);
+        path.setAttribute('stroke', '#EF4444');
+        path.setAttribute('stroke-width', String(0.5 + i * 0.03));
+        path.setAttribute('stroke-dasharray', '400 2200');
+        const dur = (20 + Math.random() * 10).toFixed(1);
+        const delay = -(Math.random() * 25).toFixed(1);
+        path.style.cssText = `animation: bgPathFlow ${dur}s ${delay}s linear infinite; opacity: ${(0.08 + i * 0.018).toFixed(3)};`;
+        svg.appendChild(path);
+      }
+      container.appendChild(svg);
+    });
+
+    const hero = document.querySelector('.hero-section');
+    if (hero) hero.prepend(container);
+  })();
+
+  // ── Splash: 1.2s sonra kapat, hero elementlerini sırayla göster ──
   window.addEventListener('load', () => {
     setTimeout(() => {
       document.getElementById('splashOverlay').classList.add('hide');
