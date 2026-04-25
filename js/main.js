@@ -168,6 +168,7 @@ function initProductFilter() {
   const btns  = document.querySelectorAll('.filter-btn');
   const cards = document.querySelectorAll('.flip-card');
   if (!btns.length || !cards.length) return;
+
   btns.forEach(btn => {
     btn.addEventListener('click', () => {
       btns.forEach(b => b.classList.remove('active'));
@@ -179,6 +180,16 @@ function initProductFilter() {
       });
     });
   });
+
+  // URL'de ?cat= varsa ilgili butonu otomatik aktif et
+  const catParam = new URLSearchParams(window.location.search).get('cat');
+  if (catParam) {
+    const matchBtn = [...btns].find(b => b.dataset.filter === catParam);
+    if (matchBtn) {
+      btns.forEach(b => b.classList.remove('active'));
+      matchBtn.classList.add('active');
+    }
+  }
 }
 
 // ── HOMEPAGE FINDER QUIZ ──────────────────────────────────────────
