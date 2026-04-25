@@ -1327,3 +1327,12 @@ footer { border-top: 1px solid var(--border2); padding: 1.75rem 2rem; text-align
   .chat-window { width: 92vw; right: -4px; height: 420px; }
   .chat-widget { bottom: 18px; right: 14px; }
 }
+
+/* ── SIRALAMA ── */
+.sort-wrap { display:flex; justify-content:flex-end; margin-bottom:1.5rem; }
+.sort-select {
+  background: var(--bg2); border: 1px solid var(--border2); color: var(--text);
+  padding: 0.5rem 1rem; border-radius: 8px; font-family: inherit; font-size: 0.85rem;
+  cursor: pointer; outline: none; transition: border-color 0.2s;
+}
+.sort-select:hover, .sort-select:focus { border-color: var(--red2); }

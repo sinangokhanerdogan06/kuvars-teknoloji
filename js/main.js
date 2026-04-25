@@ -502,12 +502,12 @@ async function urunleriYukle() {
         }
       }
 
-      urunler.forEach(urun => {
+      urunler.forEach((urun, idx) => {
         let ozellikListesi = '';
         try { ozellikListesi = JSON.parse(urun.ozellikler).map(oz => `<li>${oz}</li>`).join(''); } catch(e) {}
         const isimSafe = urun.isim.replace(/'/g, "\\'");
         const kart = `
-        <div class="flip-card fade-in visible" data-category="${urun.kategori}" data-alt-category="${urun.alt_kategori || ''}">
+        <div class="flip-card fade-in visible" data-category="${urun.kategori}" data-alt-category="${urun.alt_kategori || ''}" data-price="${parseFloat(urun.fiyat) || 0}" data-index="${idx}">
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <img src="${urun.resim_url}" alt="${urun.isim}" class="product-img"/>
@@ -591,6 +591,42 @@ function initNotifications() {
     const dd = document.getElementById('notifDropdown');
     if (dd) dd.classList.remove('open');
   });
+}
+
+// ── SIRALAMA ─────────────────────────────────────────────────────
+function initSorting() {
+  const filterDiv = document.querySelector('.filter-buttons');
+  if (!filterDiv) return;
+
+  const wrap = document.createElement('div');
+  wrap.className = 'sort-wrap';
+  wrap.innerHTML = `
+    <select class="sort-select" id="sortSelect">
+      <option value="recommended">⭐ Önerilen Sıralama</option>
+      <option value="price-asc">💰 Fiyat: Düşükten Yükseğe</option>
+      <option value="price-desc">💎 Fiyat: Yüksekten Düşüğe</option>
+      <option value="bestseller">🔥 Çok Satan</option>
+    </select>`;
+  filterDiv.after(wrap);
+
+  document.getElementById('sortSelect').addEventListener('change', function () {
+    sortProducts(this.value);
+  });
+}
+
+function sortProducts(method) {
+  const grid = document.querySelector('.products-grid');
+  if (!grid) return;
+  const cards = [...grid.querySelectorAll('.flip-card')];
+  cards.sort((a, b) => {
+    const pa = parseFloat(a.dataset.price) || 0;
+    const pb = parseFloat(b.dataset.price) || 0;
+    if (method === 'price-asc')   return pa - pb;
+    if (method === 'price-desc')  return pb - pa;
+    if (method === 'bestseller')  return pb - pa * 0.97;
+    return parseInt(a.dataset.index) - parseInt(b.dataset.index);
+  });
+  cards.forEach(c => grid.appendChild(c));
 }
 
 // ── CANLI DESTEK CHAT ────────────────────────────────────────────
@@ -707,5 +743,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initFinderQuiz();
   initQuiz();
   urunleriYukle();
+  initSorting();
   initLiveChat();
 });
